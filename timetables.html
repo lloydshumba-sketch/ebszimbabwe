@@ -8,10 +8,9 @@
 
   <meta
     name="description"
-    content="View the Excel Business School September 2026 ACCA timetables for AAA, SBR and ATX. Structured evening tuition for working professionals with live online classes, recorded access and academic support."
+    content="View the Excel Business School September 2026 ACCA class timetables for AAA, SBR and ATX. Clear evening schedules, table layouts, live online learning, recordings and student support."
   />
-
-  <meta name="theme-color" content="#081728" />
+  <meta name="theme-color" content="#02050d" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Excel Business School" />
   <link rel="canonical" href="https://www.excelbusinessschool.uk/timetables.html" />
@@ -20,7 +19,7 @@
   <meta property="og:title" content="September 2026 Timetables | Excel Business School" />
   <meta
     property="og:description"
-    content="September 2026 ACCA timetable structure for AAA, SBR and ATX students at Excel Business School."
+    content="Simple, clear and student-friendly September 2026 ACCA timetables for AAA, SBR and ATX at Excel Business School."
   />
   <meta property="og:url" content="https://www.excelbusinessschool.uk/timetables.html" />
   <meta property="og:image" content="https://www.excelbusinessschool.uk/excel-logo.png" />
@@ -30,7 +29,7 @@
   <meta name="twitter:title" content="September 2026 Timetables | Excel Business School" />
   <meta
     name="twitter:description"
-    content="Structured September 2026 ACCA class timetables for AAA, SBR and ATX."
+    content="Clear September 2026 ACCA class timetables for AAA, SBR and ATX."
   />
   <meta name="twitter:image" content="https://www.excelbusinessschool.uk/excel-logo.png" />
 
@@ -42,7 +41,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet"
   />
 
@@ -75,40 +74,56 @@
   </script>
 
   <style>
+    /* =========================================================
+       Timetables page liquid-glass extension
+       Works with the main style.css design system.
+       ========================================================= */
+
+    :root {
+      --timetable-glass: rgba(255, 255, 255, 0.78);
+      --timetable-glass-strong: rgba(255, 255, 255, 0.92);
+      --timetable-glass-dark: rgba(255, 255, 255, 0.09);
+      --timetable-line: rgba(255, 255, 255, 0.22);
+      --timetable-ink-soft: rgba(255, 255, 255, 0.76);
+    }
+
     .skip-link {
       position: absolute;
       left: 18px;
-      top: -80px;
+      top: -90px;
       z-index: 10000;
       padding: 12px 18px;
       border-radius: 999px;
       background: var(--gold);
       color: var(--navy-950);
-      font-weight: 800;
+      font-weight: 900;
+      box-shadow: var(--shadow-soft);
       transition: top 180ms ease;
     }
 
     .skip-link:focus {
       top: 18px;
+      outline: 3px solid rgba(255, 255, 255, 0.85);
+      outline-offset: 3px;
     }
 
-    .timetable-shell {
+    .timetable-page {
       background:
-        radial-gradient(circle at 5% 2%, rgba(217, 183, 115, 0.14), transparent 28rem),
-        radial-gradient(circle at 94% 16%, rgba(138, 21, 56, 0.11), transparent 30rem),
-        linear-gradient(180deg, #f7f9fc 0%, #ffffff 48%, #f3f6fa 100%);
+        radial-gradient(circle at 12% 4%, rgba(212, 175, 55, 0.18), transparent 28rem),
+        radial-gradient(circle at 92% 12%, rgba(0, 70, 173, 0.14), transparent 32rem),
+        linear-gradient(180deg, #f8fbff 0%, #ffffff 42%, #f3f6fb 100%);
       overflow: hidden;
     }
 
     .timetable-hero {
       position: relative;
-      padding: 94px 0 76px;
-      color: var(--white);
-      background:
-        linear-gradient(135deg, rgba(8, 23, 40, 0.98), rgba(16, 41, 65, 0.96)),
-        radial-gradient(circle at 16% 18%, rgba(217, 183, 115, 0.16), transparent 34%),
-        radial-gradient(circle at 86% 14%, rgba(138, 21, 56, 0.22), transparent 30%);
       overflow: hidden;
+      color: var(--white);
+      padding: 112px 0 92px;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(212, 175, 55, 0.22), transparent 28rem),
+        radial-gradient(circle at 86% 18%, rgba(0, 70, 173, 0.28), transparent 32rem),
+        linear-gradient(135deg, rgba(2, 5, 13, 0.98), rgba(7, 18, 38, 0.97));
     }
 
     .timetable-hero::before {
@@ -119,7 +134,20 @@
         linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
       background-size: 72px 72px;
-      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 84%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.84), transparent 82%);
+      pointer-events: none;
+    }
+
+    .timetable-hero::after {
+      content: "";
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      right: -180px;
+      bottom: -220px;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.12);
+      filter: blur(6px);
       pointer-events: none;
     }
 
@@ -127,18 +155,18 @@
       position: relative;
       z-index: 2;
       display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.82fr);
-      gap: 46px;
+      grid-template-columns: minmax(0, 1.04fr) minmax(340px, 0.82fr);
+      gap: 54px;
       align-items: center;
     }
 
     .timetable-copy h1 {
       margin: 0;
-      max-width: 800px;
-      font-size: clamp(3rem, 6.2vw, 5.6rem);
-      line-height: 0.96;
-      letter-spacing: -0.07em;
-      font-weight: 800;
+      max-width: 900px;
+      font-size: clamp(3rem, 6.4vw, 5.9rem);
+      line-height: 0.95;
+      letter-spacing: -0.075em;
+      font-weight: 900;
     }
 
     .timetable-copy h1 span {
@@ -147,113 +175,166 @@
     }
 
     .timetable-copy p {
-      margin: 24px 0 0;
+      margin: 26px 0 0;
       max-width: 760px;
-      color: rgba(255, 255, 255, 0.78);
-      font-size: 1.05rem;
-      line-height: 1.85;
+      color: var(--timetable-ink-soft);
+      font-size: 1.08rem;
+      line-height: 1.86;
     }
 
     .timetable-actions {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      margin-top: 32px;
+      margin-top: 34px;
     }
 
-    .calendar-card {
+    .timetable-hero-note {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .timetable-hero-note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.82rem;
+      font-weight: 800;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .timetable-hero-note i {
+      color: var(--gold);
+    }
+
+    .calendar-glass-card {
       position: relative;
       padding: 30px;
       border-radius: 34px;
-      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--timetable-line);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.72)),
+        radial-gradient(circle at top right, rgba(212, 175, 55, 0.18), transparent 18rem);
       color: var(--text);
       box-shadow: 0 34px 100px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(22px) saturate(1.25);
+      -webkit-backdrop-filter: blur(22px) saturate(1.25);
       overflow: hidden;
     }
 
-    .calendar-card::before {
+    .calendar-glass-card::before {
       content: "";
       position: absolute;
       inset: 0 0 auto;
-      height: 6px;
-      background: linear-gradient(90deg, var(--burgundy), var(--gold), var(--navy-800));
+      height: 7px;
+      background: linear-gradient(90deg, var(--burgundy), var(--gold), var(--navy-700));
     }
 
-    .calendar-card small {
+    .calendar-glass-card::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      right: -52px;
+      top: 48px;
+      border-radius: 999px;
+      background: rgba(0, 70, 173, 0.10);
+      pointer-events: none;
+    }
+
+    .calendar-glass-card small {
+      position: relative;
+      z-index: 1;
       display: inline-flex;
       margin-bottom: 14px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(138, 21, 56, 0.08);
+      background: rgba(0, 70, 173, 0.08);
       color: var(--burgundy);
-      font-weight: 800;
+      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       font-size: 0.72rem;
     }
 
-    .calendar-card h2 {
+    .calendar-glass-card h2 {
+      position: relative;
+      z-index: 1;
       margin: 0;
       color: var(--navy-950);
-      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-size: clamp(2rem, 3.2vw, 3rem);
       line-height: 1;
       letter-spacing: -0.06em;
-      font-weight: 800;
+      font-weight: 900;
     }
 
-    .calendar-card p {
+    .calendar-glass-card p {
+      position: relative;
+      z-index: 1;
       margin: 16px 0 0;
       color: var(--muted);
       line-height: 1.75;
     }
 
-    .calendar-stats {
+    .calendar-highlights {
+      position: relative;
+      z-index: 1;
       display: grid;
       gap: 12px;
       margin-top: 26px;
     }
 
-    .calendar-stat {
+    .calendar-highlight {
       display: grid;
-      grid-template-columns: 46px 1fr;
+      grid-template-columns: 46px minmax(0, 1fr);
       gap: 12px;
       align-items: center;
       padding: 14px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(2, 5, 13, 0.08);
       border-radius: 18px;
-      background: var(--paper);
+      background: rgba(255, 255, 255, 0.74);
+      box-shadow: 0 10px 28px rgba(2, 5, 13, 0.06);
     }
 
-    .calendar-stat i {
+    .calendar-highlight i {
       display: grid;
       place-items: center;
       width: 46px;
       height: 46px;
-      border-radius: 14px;
+      border-radius: 15px;
       color: var(--white);
       background: var(--navy-950);
     }
 
-    .calendar-stat:nth-child(2) i {
+    .calendar-highlight:nth-child(2) i {
       background: var(--burgundy);
     }
 
-    .calendar-stat:nth-child(3) i {
+    .calendar-highlight:nth-child(3) i {
       background: var(--gold);
       color: var(--navy-950);
     }
 
-    .calendar-stat:nth-child(4) i {
+    .calendar-highlight:nth-child(4) i {
       background: var(--navy-800);
     }
 
-    .calendar-stat strong {
+    .calendar-highlight strong {
       display: block;
       color: var(--navy-950);
       font-size: 0.92rem;
+      line-height: 1.25;
     }
 
-    .calendar-stat span {
+    .calendar-highlight span {
       display: block;
       margin-top: 3px;
       color: var(--muted);
@@ -262,95 +343,118 @@
     }
 
     .timetable-section {
-      padding: 92px 0;
+      padding: 96px 0;
     }
 
     .timetable-section.section-white {
-      background: var(--white);
+      background: rgba(255, 255, 255, 0.78);
     }
 
     .timetable-section.section-soft {
-      background: linear-gradient(180deg, var(--mist), #ffffff);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.10), transparent 24rem),
+        linear-gradient(180deg, var(--mist), #ffffff);
     }
 
     .timetable-head {
-      max-width: 860px;
-      margin: 0 auto 42px;
+      max-width: 900px;
+      margin: 0 auto 46px;
       text-align: center;
     }
 
     .timetable-head h2 {
       margin: 0;
       color: var(--navy-950);
-      font-size: clamp(2.25rem, 4.8vw, 4rem);
-      line-height: 1;
-      letter-spacing: -0.065em;
-      font-weight: 800;
+      font-size: clamp(2.25rem, 4.8vw, 4.15rem);
+      line-height: 0.98;
+      letter-spacing: -0.068em;
+      font-weight: 900;
     }
 
     .timetable-head p {
       margin: 18px auto 0;
-      max-width: 720px;
+      max-width: 760px;
       color: var(--muted);
       font-size: 1rem;
       line-height: 1.82;
     }
 
-    .overview-grid {
+    .quick-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
     }
 
-    .overview-card,
+    .quick-card,
     .paper-panel,
     .phase-card-clean,
     .document-card,
     .discipline-card,
     .support-card {
-      border: 1px solid var(--line);
-      background: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.68));
       box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px) saturate(1.18);
+      -webkit-backdrop-filter: blur(18px) saturate(1.18);
+    }
+
+    .quick-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      padding: 26px;
       border-radius: 28px;
     }
 
-    .overview-card {
-      min-height: 210px;
-      padding: 26px;
+    .quick-card::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      right: -52px;
+      bottom: -52px;
+      border-radius: 999px;
+      background: rgba(0, 70, 173, 0.08);
+      pointer-events: none;
     }
 
-    .overview-card i {
+    .quick-card i {
       display: grid;
       place-items: center;
       width: 52px;
       height: 52px;
       margin-bottom: 18px;
-      border-radius: 16px;
+      border-radius: 17px;
       color: var(--white);
       background: var(--navy-950);
     }
 
-    .overview-card:nth-child(2) i {
+    .quick-card:nth-child(2) i {
       background: var(--burgundy);
     }
 
-    .overview-card:nth-child(3) i {
+    .quick-card:nth-child(3) i {
       background: var(--gold);
       color: var(--navy-950);
     }
 
-    .overview-card h3 {
+    .quick-card:nth-child(4) i {
+      background: var(--navy-800);
+    }
+
+    .quick-card h3 {
       margin: 0;
       color: var(--navy-950);
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       line-height: 1.25;
       letter-spacing: -0.035em;
     }
 
-    .overview-card p {
+    .quick-card p {
       margin: 12px 0 0;
       color: var(--muted);
-      font-size: 0.91rem;
+      font-size: 0.92rem;
       line-height: 1.72;
     }
 
@@ -363,55 +467,79 @@
     }
 
     .paper-tab {
-      min-height: 48px;
+      min-height: 50px;
       padding: 12px 20px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(2, 5, 13, 0.10);
       border-radius: 999px;
       color: var(--navy-950);
-      background: var(--white);
-      font-weight: 800;
+      background: rgba(255, 255, 255, 0.78);
+      font-weight: 900;
       cursor: pointer;
-      transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
     .paper-tab:hover {
       transform: translateY(-2px);
-      border-color: rgba(138, 21, 56, 0.25);
+      border-color: rgba(0, 70, 173, 0.22);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .paper-tab:focus-visible {
+      outline: 4px solid rgba(0, 70, 173, 0.16);
+      outline-offset: 3px;
     }
 
     .paper-tab[aria-selected="true"] {
       color: var(--white);
       border-color: transparent;
       background: linear-gradient(135deg, var(--burgundy), var(--burgundy-700));
-      box-shadow: 0 16px 34px rgba(138, 21, 56, 0.22);
+      box-shadow: 0 18px 36px rgba(0, 70, 173, 0.24);
     }
 
     .paper-panel {
       display: none;
       padding: 34px;
+      border-radius: 32px;
       overflow: hidden;
     }
 
     .paper-panel.active {
       display: block;
+      animation: panelIn 240ms ease both;
+    }
+
+    @keyframes panelIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .paper-panel-head {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.65fr);
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.66fr);
       gap: 28px;
       align-items: start;
-      margin-bottom: 32px;
+      margin-bottom: 30px;
     }
 
     .paper-kicker {
       display: inline-flex;
+      align-items: center;
+      gap: 8px;
       margin-bottom: 12px;
       padding: 8px 12px;
       border-radius: 999px;
       color: var(--burgundy);
-      background: rgba(138, 21, 56, 0.08);
-      font-weight: 800;
+      background: rgba(0, 70, 173, 0.08);
+      font-weight: 900;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-size: 0.72rem;
@@ -420,10 +548,10 @@
     .paper-panel h3 {
       margin: 0;
       color: var(--navy-950);
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      line-height: 1;
-      letter-spacing: -0.065em;
-      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.45rem);
+      line-height: 0.98;
+      letter-spacing: -0.066em;
+      font-weight: 900;
     }
 
     .paper-panel p {
@@ -438,9 +566,10 @@
 
     .paper-summary div {
       padding: 16px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(2, 5, 13, 0.08);
       border-radius: 18px;
-      background: var(--paper);
+      background: rgba(255, 255, 255, 0.74);
+      box-shadow: 0 10px 24px rgba(2, 5, 13, 0.05);
     }
 
     .paper-summary strong {
@@ -457,66 +586,93 @@
       line-height: 1.45;
     }
 
-    .weekly-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+    .table-scroll {
       margin-top: 24px;
+      border: 1px solid rgba(2, 5, 13, 0.08);
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+      box-shadow: 0 18px 46px rgba(2, 5, 13, 0.08);
     }
 
-    .weekly-card {
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 24px;
+    .timetable-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .timetable-table caption {
+      padding: 18px 22px;
+      color: var(--white);
       background:
-        radial-gradient(circle at top right, rgba(217, 183, 115, 0.12), transparent 12rem),
-        var(--paper);
+        radial-gradient(circle at 12% 20%, rgba(212, 175, 55, 0.18), transparent 20rem),
+        linear-gradient(135deg, var(--navy-950), var(--navy-800));
+      text-align: left;
+      font-weight: 900;
+      letter-spacing: -0.025em;
     }
 
-    .weekly-card small {
-      display: inline-flex;
-      margin-bottom: 12px;
-      color: var(--burgundy);
-      font-weight: 800;
-      letter-spacing: 0.1em;
+    .timetable-table th,
+    .timetable-table td {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(2, 5, 13, 0.08);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .timetable-table th {
+      background: rgba(248, 250, 252, 0.92);
+      color: #344054;
+      font-size: 0.76rem;
       text-transform: uppercase;
-      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      font-weight: 900;
     }
 
-    .weekly-card h4 {
-      margin: 0;
+    .timetable-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .timetable-table td {
+      color: #1d2939;
+      font-size: 0.94rem;
+      line-height: 1.62;
+      font-weight: 650;
+    }
+
+    .timetable-table td:nth-child(1),
+    .timetable-table td:nth-child(2) {
+      font-weight: 900;
       color: var(--navy-950);
-      font-size: 1.18rem;
-      letter-spacing: -0.04em;
     }
 
-    .weekly-card p {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.7;
-    }
-
-    .weekly-time {
+    .time-pill {
       display: inline-flex;
-      margin-top: 18px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
       padding: 9px 12px;
       border-radius: 999px;
       background: var(--navy-950);
       color: var(--white);
-      font-weight: 800;
-      font-size: 0.78rem;
+      font-size: 0.79rem;
+      font-weight: 900;
     }
 
     .paper-note {
       margin-top: 22px;
-      padding: 18px;
+      padding: 18px 20px;
       border-left: 4px solid var(--gold);
       border-radius: 18px;
-      background: rgba(217, 183, 115, 0.1);
+      background: rgba(212, 175, 55, 0.12);
       color: var(--navy-950);
-      font-weight: 700;
-      line-height: 1.7;
+      font-weight: 750;
+      line-height: 1.72;
+    }
+
+    .paper-note strong {
+      color: var(--burgundy);
     }
 
     .phase-clean-grid,
@@ -533,19 +689,20 @@
 
     .phase-card-clean {
       padding: 28px;
-      min-height: 260px;
+      min-height: 270px;
+      border-radius: 28px;
     }
 
-    .phase-card-clean span {
+    .phase-card-clean > span {
       display: grid;
       place-items: center;
       width: 52px;
       height: 52px;
       margin-bottom: 18px;
-      border-radius: 16px;
+      border-radius: 17px;
       background: linear-gradient(135deg, var(--burgundy), var(--burgundy-700));
       color: var(--white);
-      font-weight: 800;
+      font-weight: 900;
     }
 
     .phase-card-clean h3,
@@ -554,7 +711,7 @@
     .support-card h3 {
       margin: 0;
       color: var(--navy-950);
-      font-size: 1.12rem;
+      font-size: 1.14rem;
       line-height: 1.25;
       letter-spacing: -0.035em;
     }
@@ -580,11 +737,12 @@
     .phase-card-clean li {
       color: var(--text);
       font-size: 0.88rem;
-      font-weight: 700;
+      font-weight: 750;
+      line-height: 1.5;
     }
 
     .phase-card-clean li i {
-      color: var(--burgundy);
+      color: #1a9f5a;
       margin-right: 8px;
     }
 
@@ -593,8 +751,11 @@
     }
 
     .document-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 260px;
       padding: 28px;
-      min-height: 230px;
+      border-radius: 28px;
     }
 
     .document-icon {
@@ -603,7 +764,7 @@
       width: 54px;
       height: 54px;
       margin-bottom: 18px;
-      border-radius: 17px;
+      border-radius: 18px;
       color: var(--white);
       background: var(--navy-950);
     }
@@ -621,9 +782,10 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 18px;
+      margin-top: auto;
+      padding-top: 18px;
       color: var(--burgundy);
-      font-weight: 800;
+      font-weight: 900;
       font-size: 0.9rem;
     }
 
@@ -633,7 +795,8 @@
 
     .discipline-card {
       padding: 24px;
-      min-height: 200px;
+      min-height: 210px;
+      border-radius: 26px;
     }
 
     .discipline-card i {
@@ -644,32 +807,54 @@
 
     .support-layout {
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
+      grid-template-columns: 0.94fr 1.06fr;
       gap: 32px;
       align-items: stretch;
     }
 
     .support-panel {
+      position: relative;
+      overflow: hidden;
       padding: 38px;
-      border-radius: 32px;
+      border-radius: 34px;
       color: var(--white);
       background:
-        linear-gradient(135deg, rgba(8, 23, 40, 0.98), rgba(16, 41, 65, 0.96)),
-        radial-gradient(circle at 86% 18%, rgba(217, 183, 115, 0.15), transparent 28%);
+        radial-gradient(circle at 88% 18%, rgba(212, 175, 55, 0.18), transparent 26rem),
+        linear-gradient(135deg, rgba(2, 5, 13, 0.98), rgba(7, 18, 38, 0.96));
       box-shadow: var(--shadow);
     }
 
+    .support-panel::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -88px;
+      bottom: -94px;
+      border-radius: 999px;
+      background: rgba(0, 70, 173, 0.20);
+      pointer-events: none;
+    }
+
     .support-panel h2 {
+      position: relative;
+      z-index: 1;
       margin: 0;
-      font-size: clamp(2.3rem, 4.4vw, 4rem);
-      line-height: 1;
-      letter-spacing: -0.065em;
-      font-weight: 800;
+      font-size: clamp(2.25rem, 4.4vw, 4rem);
+      line-height: 0.98;
+      letter-spacing: -0.066em;
+      font-weight: 900;
     }
 
     .support-panel h2 span {
       color: var(--gold);
       display: block;
+    }
+
+    .support-panel p,
+    .support-links {
+      position: relative;
+      z-index: 1;
     }
 
     .support-panel p {
@@ -691,7 +876,8 @@
 
     .support-card {
       padding: 24px;
-      min-height: 190px;
+      min-height: 198px;
+      border-radius: 26px;
     }
 
     .support-card i {
@@ -707,53 +893,125 @@
         grid-template-columns: 1fr;
       }
 
-      .overview-grid,
+      .quick-grid,
       .discipline-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .support-grid {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 860px) {
       .timetable-hero {
-        padding: 72px 0 60px;
+        padding: 76px 0 66px;
       }
 
       .timetable-section {
-        padding: 72px 0;
+        padding: 74px 0;
       }
 
       .timetable-copy h1 {
-        font-size: clamp(2.8rem, 14vw, 4rem);
+        font-size: clamp(2.75rem, 14vw, 4.1rem);
+        letter-spacing: -0.07em;
       }
 
-      .weekly-grid,
-      .phase-clean-grid,
-      .document-grid,
-      .support-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .calendar-card,
+      .calendar-glass-card,
       .paper-panel,
       .support-panel {
         padding: 24px;
         border-radius: 26px;
       }
+
+      .phase-clean-grid,
+      .document-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .table-scroll {
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        overflow: visible;
+      }
+
+      .timetable-table,
+      .timetable-table tbody,
+      .timetable-table tr,
+      .timetable-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .timetable-table caption {
+        border-radius: 22px 22px 0 0;
+      }
+
+      .timetable-table thead {
+        display: none;
+      }
+
+      .timetable-table tr {
+        margin: 0 0 14px;
+        padding: 16px;
+        border: 1px solid rgba(2, 5, 13, 0.08);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.86);
+        box-shadow: 0 14px 36px rgba(2, 5, 13, 0.08);
+      }
+
+      .timetable-table tr:last-child {
+        margin-bottom: 0;
+      }
+
+      .timetable-table td {
+        display: grid;
+        grid-template-columns: 124px minmax(0, 1fr);
+        gap: 14px;
+        align-items: start;
+        padding: 10px 0;
+        border: 0;
+      }
+
+      .timetable-table td::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-size: 0.74rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .time-pill {
+        width: fit-content;
+        white-space: normal;
+      }
     }
 
     @media (max-width: 620px) {
-      .overview-grid,
+      .quick-grid,
       .discipline-grid {
         grid-template-columns: 1fr;
       }
 
       .timetable-actions .btn,
-      .support-links .btn {
+      .support-links .btn,
+      .paper-tab {
         width: 100%;
       }
 
-      .paper-tab {
-        width: 100%;
+      .paper-panel h3 {
+        font-size: clamp(2rem, 12vw, 3rem);
+      }
+
+      .timetable-table td {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .calendar-highlight {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -775,9 +1033,9 @@
   <header class="topbar" aria-label="Institutional contact bar">
     <div class="container topbar-inner">
       <div class="topbar-left">
-        <span class="status-chip"><span class="live-dot" aria-hidden="true"></span> September 2026 ACCA timetable structure</span>
-        <span class="status-chip"><i class="fas fa-moon" aria-hidden="true"></i> Evening tuition for working professionals</span>
-        <span class="status-chip"><i class="fas fa-shield-halved" aria-hidden="true"></i> Academic governance</span>
+        <span class="status-chip"><span class="live-dot" aria-hidden="true"></span> September 2026 ACCA timetables</span>
+        <span class="status-chip"><i class="fas fa-moon" aria-hidden="true"></i> Evening classes for working students</span>
+        <span class="status-chip"><i class="fas fa-shield-halved" aria-hidden="true"></i> Structured academic rhythm</span>
       </div>
 
       <div class="topbar-right">
@@ -801,18 +1059,39 @@
 
       <div class="nav-links" aria-label="Main navigation">
         <a href="index.html#home">Home</a>
-        <a href="index.html#about">About</a>
+        <a href="index.html#about">About Us</a>
         <a href="index.html#courses">Courses</a>
-        <a href="index.html#success">Success</a>
-        <a href="index.html#learning-rhythm">Phases</a>
-        <a href="index.html#admissions">Admissions</a>
-        <a href="index.html#governance">Governance</a>
-        <a href="index.html#sample-lectures">Lectures</a>
+
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+            Course Outlines <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="nav-dropdown-menu" role="menu" aria-label="September 2026 course outlines">
+            <a href="aaa-course-outline.html" role="menuitem">
+              <strong>AAA Course Outline</strong>
+              <span>Advanced Audit and Assurance · September 2026</span>
+            </a>
+            <a href="sbr-course-outline.html" role="menuitem">
+              <strong>SBR Course Outline</strong>
+              <span>Strategic Business Reporting · September 2026</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="index.html#admissions">Admissions &amp; Fees</a>
         <a href="timetables.html" aria-current="page">Timetables</a>
-        <a href="portal.html">Portal</a>
+        <a href="portal.html">Student Portal</a>
+        <a href="index.html#contact">Contact</a>
       </div>
 
-      <a href="index.html#contact" class="nav-cta">Apply Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      <a
+        href="https://forms.cloud.microsoft/r/p2SFWwXme2"
+        target="_blank"
+        rel="noopener"
+        class="nav-cta"
+      >
+        Apply Now <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
 
       <button
         class="menu-btn"
@@ -843,80 +1122,93 @@
 
     <div class="mobile-links">
       <a href="index.html#home">Home <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#about">About <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      <a href="index.html#about">About Us <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
       <a href="index.html#courses">Courses <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#success">Student Success <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#learning-rhythm">Learning Phases <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#admissions">Admissions <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#pricing">Fees <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#governance">Governance <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#sample-lectures">Sample Lectures <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="timetables.html">Timetables <i class="fas fa-calendar-alt" aria-hidden="true"></i></a>
+
+      <div class="mobile-course-block">
+        <span>Course Outlines</span>
+        <a href="aaa-course-outline.html">AAA Course Outline <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        <a href="sbr-course-outline.html">SBR Course Outline <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+
+      <a href="index.html#admissions">Admissions &amp; Fees <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      <a href="timetables.html" aria-current="page">Timetables <i class="fas fa-calendar-alt" aria-hidden="true"></i></a>
       <a href="portal.html">Student Portal <i class="fas fa-user-graduate" aria-hidden="true"></i></a>
-      <a href="index.html#contact" class="mobile-cta">Apply Now</a>
+      <a href="index.html#contact">Contact <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      <a href="https://forms.cloud.microsoft/r/p2SFWwXme2" target="_blank" rel="noopener" class="mobile-cta">Apply Now</a>
     </div>
   </aside>
 
-  <main class="timetable-shell">
+  <main class="timetable-page">
     <section class="timetable-hero">
       <div class="container timetable-hero-inner">
         <div class="timetable-copy reveal">
           <div class="eyebrow light"><span></span> September 2026 ACCA Session</div>
 
           <h1>
-            Timetables built for
-            <span>serious exam execution.</span>
+            Know your class days.
+            <span>No timetable confusion.</span>
           </h1>
 
           <p>
-            View the Excel Business School timetable structure for AAA, SBR and ATX. The schedule is designed around evening tuition,
-            recorded access, marked practice, assignment discipline and revision control for ambitious ACCA candidates.
+            This page gives you a simple, direct view of the September 2026 class rhythm for AAA, SBR and ATX.
+            Pick your paper, check the table, and know exactly when to attend, what the class is for and how to prepare.
           </p>
 
           <div class="timetable-actions">
-            <a href="#paper-timetables" class="btn btn-primary">View Paper Timetables <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-            <a href="portal.html" class="btn btn-secondary"><i class="fas fa-user-graduate" aria-hidden="true"></i> Student Portal</a>
+            <a href="#paper-timetables" class="btn btn-primary">
+              View Timetables <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a href="portal.html" class="btn btn-secondary">
+              <i class="fas fa-user-graduate" aria-hidden="true"></i> Student Portal
+            </a>
+          </div>
+
+          <div class="timetable-hero-note" aria-label="Timetable features">
+            <span><i class="fas fa-video" aria-hidden="true"></i> Live online classes</span>
+            <span><i class="fas fa-clapperboard" aria-hidden="true"></i> Recordings for catch-up</span>
+            <span><i class="fas fa-pen-nib" aria-hidden="true"></i> Practice and feedback rhythm</span>
           </div>
         </div>
 
-        <aside class="calendar-card reveal" aria-label="September 2026 timetable summary">
-          <small>EBS Academic Calendar</small>
-          <h2>September 2026 Timetable</h2>
+        <aside class="calendar-glass-card reveal" aria-label="September 2026 timetable summary">
+          <small>Academic Calendar</small>
+          <h2>September 2026 Classes</h2>
           <p>
-            Structured evening learning for AAA, SBR and ATX students. AAA runs on Monday, Wednesday and Friday at 20:00,
-            while SBR runs on Tuesday at 18:30 and Thursday/Saturday at 20:00.
+            AAA, SBR and ATX each have a clear weekly rhythm. The tables below are designed for quick reading on phones,
+            tablets and desktops.
           </p>
 
-          <div class="calendar-stats">
-            <div class="calendar-stat">
+          <div class="calendar-highlights">
+            <div class="calendar-highlight">
               <i class="fas fa-clock" aria-hidden="true"></i>
               <span>
-                <strong>18:30 / 20:00 CAT</strong>
-                <span>AAA starts at 20:00; SBR starts at 18:30 on Tuesday and 20:00 on Thursday/Saturday.</span>
+                <strong>Evening learning</strong>
+                <span>Designed for students who work during the day.</span>
               </span>
             </div>
 
-            <div class="calendar-stat">
-              <i class="fas fa-video" aria-hidden="true"></i>
+            <div class="calendar-highlight">
+              <i class="fas fa-table" aria-hidden="true"></i>
               <span>
-                <strong>Live + Recorded</strong>
-                <span>Zoom delivery with recorded access for revision.</span>
+                <strong>Table layout</strong>
+                <span>Each paper has its own clear day-by-day table.</span>
               </span>
             </div>
 
-            <div class="calendar-stat">
+            <div class="calendar-highlight">
               <i class="fas fa-file-pen" aria-hidden="true"></i>
               <span>
-                <strong>Marked Practice</strong>
-                <span>Script improvement and correction discipline.</span>
+                <strong>Practice discipline</strong>
+                <span>Classes support teaching, application and correction.</span>
               </span>
             </div>
 
-            <div class="calendar-stat">
+            <div class="calendar-highlight">
               <i class="fas fa-headset" aria-hidden="true"></i>
               <span>
-                <strong>Student Support</strong>
-                <span>Class notices, reminders and tutor guidance.</span>
+                <strong>Support access</strong>
+                <span>Use WhatsApp, email or the portal for access guidance.</span>
               </span>
             </div>
           </div>
@@ -924,31 +1216,31 @@
       </div>
     </section>
 
-    <section class="timetable-section section-white" aria-label="Timetable overview">
+    <section class="timetable-section section-white" aria-label="Quick timetable overview">
       <div class="container">
-        <div class="overview-grid">
-          <article class="overview-card reveal">
+        <div class="quick-grid">
+          <article class="quick-card reveal">
             <i class="fas fa-layer-group" aria-hidden="true"></i>
-            <h3>Three focused papers</h3>
-            <p>AAA, SBR and ATX are presented separately to keep students clear on their paper stream.</p>
+            <h3>Pick your paper first</h3>
+            <p>AAA, SBR and ATX are separated so you do not confuse another paper’s class days with yours.</p>
           </article>
 
-          <article class="overview-card reveal">
+          <article class="quick-card reveal">
             <i class="fas fa-moon" aria-hidden="true"></i>
-            <h3>Professional evening rhythm</h3>
-            <p>AAA and SBR are positioned around controlled evening starts for working students and serious candidates.</p>
+            <h3>Built for after-work study</h3>
+            <p>The timetable is mainly evening-based, making it practical for working professionals and serious students.</p>
           </article>
 
-          <article class="overview-card reveal">
-            <i class="fas fa-clapperboard" aria-hidden="true"></i>
-            <h3>Recorded access</h3>
-            <p>Missed or difficult areas can be replayed through the student learning environment.</p>
+          <article class="quick-card reveal">
+            <i class="fas fa-video" aria-hidden="true"></i>
+            <h3>Attend live, replay later</h3>
+            <p>Live attendance is the priority. Recordings help with revision, missed lessons and difficult topics.</p>
           </article>
 
-          <article class="overview-card reveal">
-            <i class="fas fa-shield-halved" aria-hidden="true"></i>
-            <h3>Academic control</h3>
-            <p>Students follow teaching, practice and revision phases with clear expectations.</p>
+          <article class="quick-card reveal">
+            <i class="fas fa-bullseye" aria-hidden="true"></i>
+            <h3>Every session has a purpose</h3>
+            <p>Some sessions are for teaching, others for application, feedback, correction and exam readiness.</p>
           </article>
         </div>
       </div>
@@ -958,10 +1250,9 @@
       <div class="container">
         <div class="timetable-head reveal">
           <div class="eyebrow"><span></span> Paper Timetables</div>
-          <h2>Select your paper and view the September 2026 class structure.</h2>
+          <h2>Choose your paper and read the timetable in a proper table.</h2>
           <p>
-            Use the tabs below to switch between AAA, SBR and ATX. The selected paper stays clear and readable,
-            with sufficient spacing for mobile and desktop screens.
+            Tap a paper below. Each timetable shows the class day, start time, class purpose and what you should do before or after the session.
           </p>
         </div>
 
@@ -980,174 +1271,198 @@
         <section class="paper-panel active" id="aaa-panel" role="tabpanel" aria-labelledby="aaa-tab">
           <div class="paper-panel-head">
             <div>
-              <span class="paper-kicker">AAA Stream</span>
+              <span class="paper-kicker"><i class="fas fa-shield-halved" aria-hidden="true"></i> AAA Stream</span>
               <h3>Advanced Audit and Assurance</h3>
               <p>
-                The AAA timetable is designed for students who need technical audit judgement, scenario reading discipline,
-                professional scepticism, risk identification, audit procedures and examiner-style writing practice.
+                AAA is for students who need audit judgement, ethics, risk identification, audit procedures and examiner-style writing.
+                The rhythm below keeps the paper practical: learn the principle, apply it to a scenario, then correct your written approach.
               </p>
             </div>
 
             <div class="paper-summary">
               <div>
-                <strong>Class start time</strong>
-                <span>Monday, Wednesday and Friday at 20:00 CAT</span>
+                <strong>Class days</strong>
+                <span>Monday, Wednesday and Friday</span>
               </div>
               <div>
-                <strong>Delivery mode</strong>
-                <span>Live online class with recorded access</span>
+                <strong>Start time</strong>
+                <span>20:00 CAT</span>
               </div>
               <div>
-                <strong>Practice focus</strong>
-                <span>Audit risks, business risks, procedures, ethics and professional marks</span>
+                <strong>Main student action</strong>
+                <span>Prepare scenarios, attempt questions and submit written practice.</span>
               </div>
             </div>
           </div>
 
-          <h3>AAA weekly timetable</h3>
-          <p>AAA classes are scheduled three times a week on Mondays, Wednesdays and Fridays, with each session starting at 20:00 CAT.</p>
-
-          <div class="weekly-grid">
-            <article class="weekly-card">
-              <small>September 2026</small>
-              <h4>Monday</h4>
-              <p>Technical teaching and standard application. ISA principles, risk logic, ethics, quality management and structured discussion.</p>
-              <span class="weekly-time">20:00 CAT</span>
-            </article>
-
-            <article class="weekly-card">
-              <small>September 2026</small>
-              <h4>Wednesday</h4>
-              <p>Scenario analysis and answer construction. Case extraction, materiality, risk development, procedure drafting and professional presentation.</p>
-              <span class="weekly-time">20:00 CAT</span>
-            </article>
-
-            <article class="weekly-card">
-              <small>September 2026</small>
-              <h4>Friday</h4>
-              <p>Question practice, feedback and revision control. Marked practice, correction of weak scripts and exam technique reinforcement.</p>
-              <span class="weekly-time">20:00 CAT</span>
-            </article>
+          <div class="table-scroll">
+            <table class="timetable-table">
+              <caption>AAA September 2026 weekly timetable</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Day</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Class Purpose</th>
+                  <th scope="col">Student Preparation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Day">Monday</td>
+                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
+                  <td data-label="Class Purpose">Technical teaching: audit principles, ethics, ISA logic, quality management and core topic explanation.</td>
+                  <td data-label="Student Preparation">Read the topic outline before class and bring questions from the notes.</td>
+                </tr>
+                <tr>
+                  <td data-label="Day">Wednesday</td>
+                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
+                  <td data-label="Class Purpose">Scenario analysis: audit risk, business risk, materiality, procedures and professional answer construction.</td>
+                  <td data-label="Student Preparation">Attempt short scenario extracts and practise turning facts into mark-earning points.</td>
+                </tr>
+                <tr>
+                  <td data-label="Day">Friday</td>
+                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
+                  <td data-label="Class Purpose">Practice and feedback: marked work, correction of weak scripts, timing discipline and revision control.</td>
+                  <td data-label="Student Preparation">Submit written practice where required and review corrections before the next class.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="paper-note">
-            AAA students should prepare questions before each Monday, Wednesday and Friday session and submit written practice during the practice phase so feedback can be meaningful.
+            <strong>Direct guidance:</strong> AAA is not passed by listening only. Attend live where possible, write answers, and correct your script style early.
           </div>
         </section>
 
-        <section class="paper-panel" id="sbr-panel" role="tabpanel" aria-labelledby="sbr-tab">
+        <section class="paper-panel" id="sbr-panel" role="tabpanel" aria-labelledby="sbr-tab" hidden>
           <div class="paper-panel-head">
             <div>
-              <span class="paper-kicker">SBR Stream</span>
+              <span class="paper-kicker"><i class="fas fa-chart-line" aria-hidden="true"></i> SBR Stream</span>
               <h3>Strategic Business Reporting</h3>
               <p>
-                The SBR timetable is built around IFRS understanding, professional judgement, scenario application,
-                discussion quality and the ability to explain financial reporting consequences clearly.
+                SBR is for students who need IFRS clarity, professional judgement and the ability to explain reporting consequences.
+                The timetable separates technical understanding from application and written discussion.
               </p>
             </div>
 
             <div class="paper-summary">
               <div>
-                <strong>Class start times</strong>
-                <span>Tuesday at 18:30; Thursday and Saturday at 20:00 CAT</span>
+                <strong>Class days</strong>
+                <span>Tuesday, Thursday and Saturday</span>
               </div>
               <div>
-                <strong>Technical focus</strong>
-                <span>IFRS treatment, analysis, disclosure and professional communication</span>
+                <strong>Start times</strong>
+                <span>Tuesday at 18:30 CAT; Thursday and Saturday at 20:00 CAT</span>
               </div>
               <div>
-                <strong>Practice focus</strong>
-                <span>Scenario-based written answers and interpretation of reporting issues</span>
+                <strong>Main student action</strong>
+                <span>Revise IFRS areas before class and practise explaining treatments clearly.</span>
               </div>
             </div>
           </div>
 
-          <h3>SBR weekly timetable</h3>
-          <p>SBR classes run on Tuesday at 18:30 CAT, followed by Thursday and Saturday evening sessions starting at 20:00 CAT.</p>
-
-          <div class="weekly-grid">
-            <article class="weekly-card">
-              <small>September 2026</small>
-              <h4>Tuesday</h4>
-              <p>IFRS technical treatment. Recognition, measurement, presentation and disclosure principles for examinable standards.</p>
-              <span class="weekly-time">18:30 CAT</span>
-            </article>
-
-            <article class="weekly-card">
-              <small>September 2026</small>
-              <h4>Thursday</h4>
-              <p>Scenario application and professional judgement. Applying standards to transactions, explaining consequences and drafting balanced discussion.</p>
-              <span class="weekly-time">20:00 CAT</span>
-            </article>
-
-            <article class="weekly-card">
-              <small>September 2026</small>
-              <h4>Saturday</h4>
-              <p>Practice questions and feedback clinic. Question practice, marked feedback and correction of weak reporting explanations.</p>
-              <span class="weekly-time">20:00 CAT</span>
-            </article>
+          <div class="table-scroll">
+            <table class="timetable-table">
+              <caption>SBR September 2026 weekly timetable</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Day</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Class Purpose</th>
+                  <th scope="col">Student Preparation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Day">Tuesday</td>
+                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 18:30 CAT</span></td>
+                  <td data-label="Class Purpose">IFRS technical class: recognition, measurement, presentation and disclosure principles.</td>
+                  <td data-label="Student Preparation">Read the standard area before class and note the treatment you do not understand.</td>
+                </tr>
+                <tr>
+                  <td data-label="Day">Thursday</td>
+                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
+                  <td data-label="Class Purpose">Scenario application: applying IFRS to transactions and explaining the reporting effect.</td>
+                  <td data-label="Student Preparation">Practise short written explanations, not only calculations.</td>
+                </tr>
+                <tr>
+                  <td data-label="Day">Saturday</td>
+                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
+                  <td data-label="Class Purpose">Question practice and feedback clinic: correcting weak reporting answers and improving professional discussion.</td>
+                  <td data-label="Student Preparation">Bring attempted questions and mark where you got stuck.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="paper-note">
-            SBR students should revise the relevant IFRS area before the Tuesday, Thursday and Saturday sessions and attempt written discussion practice after class.
+            <strong>Direct guidance:</strong> SBR rewards clear explanation. Do not only memorise standards; practise writing the accounting treatment in plain, professional language.
           </div>
         </section>
 
-        <section class="paper-panel" id="atx-panel" role="tabpanel" aria-labelledby="atx-tab">
+        <section class="paper-panel" id="atx-panel" role="tabpanel" aria-labelledby="atx-tab" hidden>
           <div class="paper-panel-head">
             <div>
-              <span class="paper-kicker">ATX Stream</span>
+              <span class="paper-kicker"><i class="fas fa-scale-balanced" aria-hidden="true"></i> ATX Stream</span>
               <h3>Advanced Taxation UK</h3>
               <p>
-                The ATX timetable is structured for technical taxation competence, advisory thinking, planning logic,
-                computation accuracy and professional communication in advanced tax scenarios.
+                ATX is for students who need tax rule discipline, computation accuracy, planning logic and professional advisory writing.
+                The timetable keeps technical work, planning and question correction separate.
               </p>
             </div>
 
             <div class="paper-summary">
               <div>
+                <strong>Class days</strong>
+                <span>Monday, Thursday and Sunday</span>
+              </div>
+              <div>
                 <strong>Class window</strong>
-                <span>7:00 PM - 10:00 PM CAT</span>
+                <span>19:00 - 22:00 CAT</span>
               </div>
               <div>
-                <strong>Technical focus</strong>
-                <span>Tax rules, computations, planning, reliefs and advisory presentation</span>
-              </div>
-              <div>
-                <strong>Practice focus</strong>
-                <span>Tax advisory answers, computations and scenario-based recommendations</span>
+                <strong>Main student action</strong>
+                <span>Bring computations, tax notes and attempted advisory questions.</span>
               </div>
             </div>
           </div>
 
-          <h3>ATX weekly timetable</h3>
-          <p>The ATX rhythm separates technical coverage from applied tax planning and written advisory practice.</p>
-
-          <div class="weekly-grid">
-            <article class="weekly-card">
-              <small>September 2026</small>
-              <h4>Monday</h4>
-              <p>Technical rules and computation discipline. Core tax rules, calculations, reliefs, exemptions and common exam traps.</p>
-              <span class="weekly-time">7PM - 10PM</span>
-            </article>
-
-            <article class="weekly-card">
-              <small>September 2026</small>
-              <h4>Thursday</h4>
-              <p>Tax planning and advisory application. Applying rules to client scenarios and developing professional recommendations.</p>
-              <span class="weekly-time">7PM - 10PM</span>
-            </article>
-
-            <article class="weekly-card">
-              <small>September 2026</small>
-              <h4>Sunday</h4>
-              <p>Question practice and correction session. Timed practice, computation review, advisory style and feedback on weak areas.</p>
-              <span class="weekly-time">7PM - 10PM</span>
-            </article>
+          <div class="table-scroll">
+            <table class="timetable-table">
+              <caption>ATX September 2026 weekly timetable</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Day</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Class Purpose</th>
+                  <th scope="col">Student Preparation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Day">Monday</td>
+                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 19:00 - 22:00 CAT</span></td>
+                  <td data-label="Class Purpose">Technical tax rules and computation discipline: core rules, reliefs, exemptions and exam traps.</td>
+                  <td data-label="Student Preparation">Revise the tax area and prepare calculation questions before class.</td>
+                </tr>
+                <tr>
+                  <td data-label="Day">Thursday</td>
+                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 19:00 - 22:00 CAT</span></td>
+                  <td data-label="Class Purpose">Tax planning and advisory application: applying rules to client scenarios and recommending action.</td>
+                  <td data-label="Student Preparation">Prepare written advisory points and identify the tax planning issue in the scenario.</td>
+                </tr>
+                <tr>
+                  <td data-label="Day">Sunday</td>
+                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 19:00 - 22:00 CAT</span></td>
+                  <td data-label="Class Purpose">Question practice and correction: timed practice, computation review and advisory style improvement.</td>
+                  <td data-label="Student Preparation">Bring attempted questions so corrections can be practical and specific.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="paper-note">
-            ATX students should bring computations, tax planning notes and attempted questions to support active correction during practice sessions.
+            <strong>Direct guidance:</strong> ATX needs both numbers and advice. Practise computations, but also learn how to explain tax consequences to a client.
           </div>
         </section>
       </div>
@@ -1156,45 +1471,44 @@
     <section class="timetable-section section-white">
       <div class="container">
         <div class="timetable-head reveal">
-          <div class="eyebrow"><span></span> Learning Phases</div>
-          <h2>The timetable is not random. It follows a controlled academic rhythm.</h2>
+          <div class="eyebrow"><span></span> Learning Rhythm</div>
+          <h2>The timetable follows a simple academic rhythm.</h2>
           <p>
-            Each paper follows a disciplined sequence: technical mastery first, then question application,
-            then revision and mock exam control.
+            The week is not random. Students move from teaching, to practice, to correction and revision.
           </p>
         </div>
 
         <div class="phase-clean-grid">
           <article class="phase-card-clean reveal">
             <span>01</span>
-            <h3>Teaching Phase</h3>
-            <p>Structured technical tuition to build the knowledge base required before serious exam practice begins.</p>
+            <h3>Attend and understand</h3>
+            <p>The first job is to attend class and understand the technical issue properly.</p>
             <ul>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Technical coverage and explanations</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Standards, rules, models and principles</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Tutor-led classroom discipline</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Join live classes on time</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Take structured notes</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Ask questions early</li>
             </ul>
           </article>
 
           <article class="phase-card-clean reveal">
             <span>02</span>
-            <h3>Practice Phase</h3>
-            <p>Students move from listening to writing. The aim is to improve exam output, not merely classroom understanding.</p>
+            <h3>Practise and submit</h3>
+            <p>Real improvement starts when students write answers and submit work for correction.</p>
             <ul>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Scenario analysis and application</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Assignments and marked scripts</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Correction of weak answer technique</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Attempt exam-style questions</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Submit written practice</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Correct weak points</li>
             </ul>
           </article>
 
           <article class="phase-card-clean reveal">
             <span>03</span>
-            <h3>Revision Phase</h3>
-            <p>Final preparation focuses on timed exam discipline, weak-area repair, mock-style practice and confidence management.</p>
+            <h3>Revise and control timing</h3>
+            <p>The final stage is about speed, confidence, exam discipline and avoiding repeated mistakes.</p>
             <ul>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Timed question practice</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Exam technique and final correction</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Readiness check before the exam</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Review recordings</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Practise under time pressure</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Fix recurring errors</li>
             </ul>
           </article>
         </div>
@@ -1204,11 +1518,10 @@
     <section class="timetable-section section-soft" id="documents">
       <div class="container">
         <div class="timetable-head reveal">
-          <div class="eyebrow"><span></span> Timetable Documents</div>
-          <h2>Official September 2026 timetable documents.</h2>
+          <div class="eyebrow"><span></span> Official Timetable Links</div>
+          <h2>Jump straight to your paper timetable.</h2>
           <p>
-            Select the relevant paper timetable below for class times, study rhythm and access guidance.
-            Students should confirm their selected paper stream before the first class.
+            Select your paper below. The page will open the correct timetable table immediately.
           </p>
         </div>
 
@@ -1216,27 +1529,27 @@
           <article class="document-card reveal">
             <span class="document-icon"><i class="fas fa-file-lines" aria-hidden="true"></i></span>
             <h3>AAA September 2026 Timetable</h3>
-            <p>View the official Advanced Audit and Assurance September 2026 timetable.</p>
+            <p>Advanced Audit and Assurance classes on Monday, Wednesday and Friday at 20:00 CAT.</p>
             <a href="#aaa-panel" data-paper-link="aaa">
-              View AAA timetable <i class="fas fa-arrow-right" aria-hidden="true"></i>
+              View AAA table <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </a>
           </article>
 
           <article class="document-card reveal">
             <span class="document-icon"><i class="fas fa-file-lines" aria-hidden="true"></i></span>
             <h3>SBR September 2026 Timetable</h3>
-            <p>View the official Strategic Business Reporting September 2026 timetable.</p>
+            <p>Strategic Business Reporting classes on Tuesday, Thursday and Saturday evenings.</p>
             <a href="#sbr-panel" data-paper-link="sbr">
-              View SBR timetable <i class="fas fa-arrow-right" aria-hidden="true"></i>
+              View SBR table <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </a>
           </article>
 
           <article class="document-card reveal">
             <span class="document-icon"><i class="fas fa-file-lines" aria-hidden="true"></i></span>
             <h3>ATX September 2026 Timetable</h3>
-            <p>View the official Advanced Taxation UK September 2026 timetable.</p>
+            <p>Advanced Taxation UK classes on Monday, Thursday and Sunday from 19:00 to 22:00 CAT.</p>
             <a href="#atx-panel" data-paper-link="atx">
-              View ATX timetable <i class="fas fa-arrow-right" aria-hidden="true"></i>
+              View ATX table <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </a>
           </article>
         </div>
@@ -1246,37 +1559,36 @@
     <section class="timetable-section section-white">
       <div class="container">
         <div class="timetable-head reveal">
-          <div class="eyebrow"><span></span> Academic Discipline</div>
-          <h2>Class attendance must support real exam progress.</h2>
+          <div class="eyebrow"><span></span> Student Discipline</div>
+          <h2>Use the timetable as a study commitment, not just a calendar.</h2>
           <p>
-            The timetable should communicate seriousness. Students are expected to attend live sessions, watch recordings where necessary,
-            attempt assigned work and follow the academic rhythm set for each paper.
+            The best students do not only know the class time. They prepare before class, attend properly, revise recordings and submit practice.
           </p>
         </div>
 
         <div class="discipline-grid">
           <article class="discipline-card reveal">
             <i class="fas fa-clock" aria-hidden="true"></i>
-            <h3>Attend on time</h3>
-            <p>Students should join lessons early enough to settle before teaching starts.</p>
+            <h3>Join early</h3>
+            <p>Log in before class starts so you do not miss the opening explanation.</p>
           </article>
 
           <article class="discipline-card reveal">
             <i class="fas fa-video" aria-hidden="true"></i>
-            <h3>Use recordings properly</h3>
-            <p>Recorded access supports revision and missed lessons, but should not replace class discipline.</p>
+            <h3>Replay difficult parts</h3>
+            <p>Recordings are for revision, catch-up and repetition of difficult areas.</p>
           </article>
 
           <article class="discipline-card reveal">
             <i class="fas fa-pen-nib" aria-hidden="true"></i>
-            <h3>Submit written practice</h3>
-            <p>Students improve faster when they submit written answers for correction and review.</p>
+            <h3>Write answers</h3>
+            <p>Listening helps you understand. Writing helps you pass.</p>
           </article>
 
           <article class="discipline-card reveal">
             <i class="fas fa-lock" aria-hidden="true"></i>
-            <h3>Respect access controls</h3>
-            <p>Class links, recordings and study files are for enrolled students only.</p>
+            <h3>Protect access</h3>
+            <p>Class links, recordings and materials are for enrolled students only.</p>
           </article>
         </div>
       </div>
@@ -1287,12 +1599,12 @@
         <div class="support-panel reveal">
           <div class="eyebrow light"><span></span> Student Support</div>
           <h2>
-            Need timetable guidance
-            <span>or class access?</span>
+            Not sure which timetable
+            <span>belongs to you?</span>
           </h2>
           <p>
-            If you are not sure which class stream applies to you, contact Excel Business School with your name,
-            selected ACCA paper and target exam session. Enrolled students should also use the portal for controlled academic access.
+            Send your name, selected ACCA paper and target exam session. You will be guided on the correct class stream,
+            portal access and first-class preparation.
           </p>
 
           <div class="support-links">
@@ -1311,20 +1623,20 @@
         <div class="support-grid">
           <article class="support-card reveal">
             <i class="fas fa-calendar-check" aria-hidden="true"></i>
-            <h3>Timetable confirmation</h3>
-            <p>Confirm your paper stream, class dates and access instructions.</p>
+            <h3>Confirm your class</h3>
+            <p>Check your paper, class days and exact start time before the first session.</p>
           </article>
 
           <article class="support-card reveal">
             <i class="fas fa-laptop" aria-hidden="true"></i>
-            <h3>Zoom and portal access</h3>
-            <p>Use the student portal and support channels for controlled access guidance.</p>
+            <h3>Access the portal</h3>
+            <p>Use the portal for controlled learning access and student materials.</p>
           </article>
 
           <article class="support-card reveal">
             <i class="fas fa-book-open-reader" aria-hidden="true"></i>
-            <h3>Study preparation</h3>
-            <p>Ask what to prepare before your first class so that you start with discipline.</p>
+            <h3>Prepare properly</h3>
+            <p>Ask what to read before class so you do not start behind.</p>
           </article>
         </div>
       </div>
@@ -1346,8 +1658,8 @@
 
       <div>
         <h3>Programmes</h3>
-        <a href="index.html#courses">AAA</a>
-        <a href="index.html#courses">SBR</a>
+        <a href="aaa-course-outline.html">AAA Course Outline</a>
+        <a href="sbr-course-outline.html">SBR Course Outline</a>
         <a href="index.html#courses">ATX</a>
       </div>
 
@@ -1363,7 +1675,7 @@
         <h3>Access</h3>
         <a href="portal.html">Student Portal</a>
         <a href="index.html#sample-lectures">Sample Lectures</a>
-        <a href="index.html#contact">Apply Now</a>
+        <a href="https://forms.cloud.microsoft/r/p2SFWwXme2" target="_blank" rel="noopener">Apply Now</a>
         <a href="mailto:lloyd.shumba@excelbusinessschool.uk">Support Desk</a>
       </div>
     </div>
@@ -1381,19 +1693,25 @@
       const mobileMenu = document.getElementById('mobileMenu');
       const mobileBackdrop = document.getElementById('mobileBackdrop');
       const mobileLinks = document.querySelectorAll('.mobile-links a');
+      const yearElement = document.getElementById('year');
 
       function openMenu() {
         if (!mobileMenu || !mobileBackdrop || !menuBtn) return;
+
         mobileMenu.classList.add('open');
         mobileBackdrop.classList.add('open');
         mobileMenu.setAttribute('aria-hidden', 'false');
         mobileBackdrop.setAttribute('aria-hidden', 'false');
         menuBtn.setAttribute('aria-expanded', 'true');
         document.body.classList.add('menu-open');
+
+        const firstLink = mobileMenu.querySelector('a, button');
+        if (firstLink) firstLink.focus({ preventScroll: true });
       }
 
       function closeMenu() {
         if (!mobileMenu || !mobileBackdrop || !menuBtn) return;
+
         mobileMenu.classList.remove('open');
         mobileBackdrop.classList.remove('open');
         mobileMenu.setAttribute('aria-hidden', 'true');
@@ -1411,10 +1729,17 @@
         if (event.key === 'Escape') closeMenu();
       });
 
+      const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
+
+      if (dropdownToggle) {
+        dropdownToggle.addEventListener('focus', () => dropdownToggle.setAttribute('aria-expanded', 'true'));
+        dropdownToggle.addEventListener('blur', () => dropdownToggle.setAttribute('aria-expanded', 'false'));
+      }
+
       const tabs = Array.from(document.querySelectorAll('.paper-tab'));
       const panels = Array.from(document.querySelectorAll('.paper-panel'));
 
-      function activatePaper(paperKey) {
+      function activatePaper(paperKey, shouldFocusTab) {
         const targetTab = document.getElementById(`${paperKey}-tab`);
         const targetPanel = document.getElementById(`${paperKey}-panel`);
 
@@ -1423,32 +1748,61 @@
         tabs.forEach((tab) => {
           const isSelected = tab === targetTab;
           tab.setAttribute('aria-selected', String(isSelected));
+          tab.setAttribute('tabindex', isSelected ? '0' : '-1');
         });
 
         panels.forEach((panel) => {
-          panel.classList.toggle('active', panel === targetPanel);
+          const isActive = panel === targetPanel;
+          panel.classList.toggle('active', isActive);
+          panel.hidden = !isActive;
         });
+
+        if (shouldFocusTab) targetTab.focus();
       }
 
-      tabs.forEach((tab) => {
+      tabs.forEach((tab, index) => {
+        tab.setAttribute('tabindex', tab.getAttribute('aria-selected') === 'true' ? '0' : '-1');
+
         tab.addEventListener('click', () => {
           const paperKey = tab.id.replace('-tab', '');
-          activatePaper(paperKey);
+          activatePaper(paperKey, false);
+        });
+
+        tab.addEventListener('keydown', (event) => {
+          const keyMap = {
+            ArrowRight: 1,
+            ArrowDown: 1,
+            ArrowLeft: -1,
+            ArrowUp: -1
+          };
+
+          if (!(event.key in keyMap)) return;
+
+          event.preventDefault();
+          const nextIndex = (index + keyMap[event.key] + tabs.length) % tabs.length;
+          const paperKey = tabs[nextIndex].id.replace('-tab', '');
+          activatePaper(paperKey, true);
         });
       });
 
       document.querySelectorAll('[data-paper-link]').forEach((link) => {
         link.addEventListener('click', (event) => {
           const paperKey = link.getAttribute('data-paper-link');
-          activatePaper(paperKey);
-
           const panel = document.getElementById(`${paperKey}-panel`);
+
+          activatePaper(paperKey, false);
+
           if (panel) {
             event.preventDefault();
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         });
       });
+
+      const hashPaper = window.location.hash.replace('#', '').replace('-panel', '');
+      if (['aaa', 'sbr', 'atx'].includes(hashPaper)) {
+        activatePaper(hashPaper, false);
+      }
 
       const revealItems = document.querySelectorAll('.reveal');
 
@@ -1467,7 +1821,6 @@
         revealItems.forEach((item) => item.classList.add('in-view'));
       }
 
-      const yearElement = document.getElementById('year');
       if (yearElement) yearElement.textContent = new Date().getFullYear();
     })();
   </script>
