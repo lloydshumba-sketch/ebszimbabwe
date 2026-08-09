@@ -36,15 +36,8 @@
   <link rel="icon" type="image/png" href="excel-logo.png" />
   <link rel="apple-touch-icon" href="excel-logo.png" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://images.unsplash.com" />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
 
   <link
     rel="preload"
@@ -831,7 +824,7 @@
       <div>
         <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
           <img src="excel-logo.png" width="50" height="35" alt="Excel Business School logo" />
-          <strong style="color: #ffffff; font-size: 1.2rem; font-family: 'Playfair Display', serif;">Excel Business School</strong>
+          <strong style="color: #ffffff; font-size: 1.2rem; font-family: 'Google Sans', 'Google Sans Text', system-ui, sans-serif;">Excel Business School</strong>
         </div>
         <p style="font-size: 0.9rem; line-height: 1.6; color: #64748b;">
           Authoritative online ACCA tuition delivering elite instruction, surgical script correction, and disciplined academic governance for AAA, SBR, and ATX candidates.
@@ -869,38 +862,37 @@
     </div>
 
     <div class="container" style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #475569;">
-      <p style="margin: 0;">&copy; 2026 Excel Business School. All Rights Reserved. Private Business Institute.</p>
+      <p style="margin: 0;">&copy; <span id="year"></span> Excel Business School. All Rights Reserved. Private Business Institute.</p>
       <p style="margin: 0;">Uncompromising ACCA Tuition</p>
     </div>
   </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Mobile Navigation Logic
       const menuBtn = document.getElementById('menuBtn');
       const closeBtn = document.getElementById('closeBtn');
       const mobileMenu = document.getElementById('mobileMenu');
       const mobileBackdrop = document.getElementById('mobileBackdrop');
 
       function openMenu() {
-        if (mobileMenu && mobileBackdrop) {
-          mobileMenu.classList.add('active');
-          mobileBackdrop.classList.add('active');
+        if (mobileMenu && mobileBackdrop && menuBtn) {
+          mobileMenu.classList.add('open');
+          mobileBackdrop.classList.add('open');
           menuBtn.setAttribute('aria-expanded', 'true');
           mobileMenu.setAttribute('aria-hidden', 'false');
           mobileBackdrop.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
+          document.body.classList.add('menu-open');
         }
       }
 
       function closeMenu() {
-        if (mobileMenu && mobileBackdrop) {
-          mobileMenu.classList.remove('active');
-          mobileBackdrop.classList.remove('active');
+        if (mobileMenu && mobileBackdrop && menuBtn) {
+          mobileMenu.classList.remove('open');
+          mobileBackdrop.classList.remove('open');
           menuBtn.setAttribute('aria-expanded', 'false');
           mobileMenu.setAttribute('aria-hidden', 'true');
           mobileBackdrop.setAttribute('aria-hidden', 'true');
-          document.body.style.overflow = '';
+          document.body.classList.remove('menu-open');
         }
       }
 
@@ -908,11 +900,13 @@
       if (closeBtn) closeBtn.addEventListener('click', closeMenu);
       if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMenu);
 
-      // Close mobile menu when clicking navigation links
       const mobileLinks = document.querySelectorAll('.mobile-links a');
       mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
 
-      // Scroll Reveal Animations
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenu();
+      });
+
       const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -921,12 +915,16 @@
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('active');
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
           }
         });
       }, observerOptions);
 
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      const yearElement = document.getElementById('year');
+      if (yearElement) yearElement.textContent = new Date().getFullYear();
     });
   </script>
 </body>
