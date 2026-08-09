@@ -50,8 +50,6 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   />
 
-  <link rel="stylesheet" href="style.css" />
-
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -74,6 +72,1315 @@
   </script>
 
   <style>
+    /* ==========================================================================
+       Excel Business School - Master Stylesheet
+       ========================================================================== */
+
+    /* --- Custom Properties (Variables) --- */
+    :root {
+      --ink: #0b192c;
+      --ink-2: #132744;
+      --gold: #c5a059;
+      --gold-light: #e4c582;
+      --paper: #fff;
+      --soft: #f5f7fb;
+      --muted: #617086;
+      --line: #dde4ee;
+      --radius: 18px;
+      --shadow: 0 20px 50px rgba(11, 25, 44, 0.13);
+    }
+
+    /* --- Base & Reset --- */
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      /* Prevents sticky navbar from overlapping anchor link targets */
+      scroll-padding-top: 90px; 
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* --- Typography & Links --- */
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:focus-visible, 
+    button:focus-visible, 
+    input:focus-visible, 
+    select:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    /* --- Layout Containers --- */
+    .container {
+      width: min(1180px, calc(100% - 3rem));
+      margin-inline: auto;
+    }
+
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* --- Accessibility Skip Link --- */
+    .skip-link {
+      position: fixed;
+      left: 1rem;
+      top: -4rem;
+      z-index: 1000;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus,
+    .skip-link:focus-visible {
+      top: 1rem;
+      outline: none;
+    }
+
+    /* --- Topbar --- */
+    .topbar {
+      background: #071221;
+      color: #d5deed;
+      font-size: 0.79rem;
+    }
+
+    .topbar-inner {
+      min-height: 41px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .topbar-left, 
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .topbar-right a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .topbar-right a:hover {
+      color: var(--gold-light);
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      padding: 0.3rem 0.55rem;
+      border: 1px solid rgba(197, 160, 89, 0.25);
+      border-radius: 999px;
+      color: #f5e7c8;
+      white-space: nowrap;
+    }
+
+    .live-dot {
+      width: 0.48rem;
+      height: 0.48rem;
+      border-radius: 100%;
+      display: inline-block;
+      background: #52d99b;
+      box-shadow: 0 0 0 3px rgba(82, 217, 155, 0.13);
+      animation: pulse 1.8s infinite;
+    }
+
+    /* --- Navigation --- */
+    .navbar {
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid rgba(11, 25, 44, 0.09);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.62rem;
+      flex: 0 0 auto;
+    }
+
+    .brand-logo {
+      width: 56px;
+      height: 48px;
+    }
+
+    .brand-text {
+      display: grid;
+      line-height: 1.1;
+    }
+
+    .brand-text strong {
+      font-size: 1rem;
+      letter-spacing: -0.025em;
+    }
+
+    .brand-text small {
+      font-size: 0.65rem;
+      letter-spacing: 0.065em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.28rem;
+    }
+
+    .nav-links {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .nav-links > a {
+      padding: 0.5rem 0;
+      position: relative;
+    }
+
+    .nav-links > a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0.22rem;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s ease;
+    }
+
+    .nav-links > a:hover::after, 
+    .nav-links > a[aria-current=page]::after {
+      transform: scaleX(1);
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-toggle {
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font-weight: 700;
+      padding: 0.5rem 0;
+      cursor: pointer;
+    }
+
+    .nav-dropdown-toggle i {
+      font-size: 0.7rem;
+      margin-left: 0.24rem;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-dropdown-toggle[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown-menu {
+      display: grid;
+      gap: 0.1rem;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 0.8rem);
+      width: 300px;
+      padding: 0.55rem;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 18px 45px rgba(11, 25, 44, 0.17);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-0.35rem);
+      transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    }
+
+    .nav-dropdown-toggle[aria-expanded="true"] + .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-dropdown-menu a {
+      padding: 0.7rem 0.75rem;
+      border-radius: 8px;
+    }
+
+    .nav-dropdown-menu a:hover, 
+    .nav-dropdown-menu a:focus {
+      background: #f7f4ed;
+    }
+
+    .nav-dropdown-menu strong, 
+    .nav-dropdown-menu span {
+      display: block;
+    }
+
+    .nav-dropdown-menu strong {
+      font-size: 0.82rem;
+    }
+
+    .nav-dropdown-menu span {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    /* --- Buttons & CTAs --- */
+    .nav-cta, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      border: 0;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-cta {
+      padding: 0.67rem 0.88rem;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--ink);
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 0.8rem 1.12rem;
+      border-radius: 8px;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #1b1b19;
+    }
+
+    .btn-primary:hover {
+      background: #dab66e;
+      box-shadow: 0 8px 22px rgba(197, 160, 89, 0.2);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-cta:hover, .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* --- Mobile Menu --- */
+    .menu-btn {
+      display: none;
+      margin-left: auto;
+      width: 43px;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .mobile-backdrop {
+      position: fixed;
+      z-index: 198;
+      inset: 0;
+      background: rgba(2, 9, 20, 0.58);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .mobile-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      z-index: 199;
+      right: 0;
+      top: 0;
+      width: min(370px, 90vw);
+      height: 100dvh;
+      padding: 1.3rem;
+      background: #fff;
+      box-shadow: -12px 0 40px rgba(0, 0, 0, 0.16);
+      transform: translateX(103%);
+      transition: transform 0.3s ease;
+      overflow: auto;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    .mobile-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mobile-head span, 
+    .mobile-course-block > span {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    .mobile-head strong {
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    .close-btn {
+      border: 0;
+      background: #f0f3f8;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .close-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .mobile-links {
+      display: grid;
+      margin-top: 1rem;
+    }
+
+    .mobile-links > a, 
+    .mobile-course-block a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0.1rem;
+      border-bottom: 1px solid var(--line);
+      font-weight: 700;
+    }
+
+    .mobile-links i {
+      font-size: 0.75rem;
+      color: var(--gold);
+    }
+
+    .mobile-course-block {
+      padding: 1rem 0 0.3rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mobile-course-block a {
+      font-size: 0.86rem;
+      padding: 0.7rem 0.1rem;
+      border: 0;
+    }
+
+    .mobile-cta {
+      padding: 0.9rem !important;
+      margin-top: 1rem;
+      border: 0 !important;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff !important;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: linear-gradient(122deg, #071526 0%, #0d2c4a 62%, #123d65 100%);
+      color: #fff;
+      padding: 5.9rem 0 5.2rem;
+    }
+
+    .hero-shape {
+      position: absolute;
+      border-radius: 999px;
+      z-index: -1;
+      filter: blur(0.3px);
+    }
+
+    .hero-shape-one {
+      width: 640px;
+      height: 640px;
+      right: -170px;
+      top: -360px;
+      background: radial-gradient(circle, rgba(230, 195, 126, 0.26), transparent 67%);
+    }
+
+    .hero-shape-two {
+      width: 460px;
+      height: 460px;
+      left: -260px;
+      bottom: -275px;
+      border: 1px solid rgba(197, 160, 89, 0.22);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.06fr 0.94fr;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: #9b7334;
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow > span {
+      display: inline-block;
+      width: 26px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .eyebrow.light {
+      color: var(--gold-light);
+    }
+
+    .hero h1 {
+      max-width: 700px;
+      margin: 0.9rem 0 1.25rem;
+      font-size: clamp(2.4rem, 5vw, 4.55rem);
+      line-height: 1.08;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-copy > p {
+      max-width: 655px;
+      margin-bottom: 2rem;
+      color: #dce7f4;
+      font-size: 1.08rem;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 2.4rem;
+      max-width: 640px;
+    }
+
+    .hero-metrics div {
+      padding: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    .hero-metrics strong, 
+    .hero-metrics span {
+      display: block;
+    }
+
+    .hero-metrics strong {
+      font-size: 1.15rem;
+      color: var(--gold-light);
+    }
+
+    .hero-metrics span {
+      margin-top: 0.12rem;
+      color: #c2d2e4;
+      font-size: 0.71rem;
+      line-height: 1.35;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+
+    .image-card {
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      aspect-ratio: 1.2;
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .console-card {
+      border: 1px solid rgba(255, 255, 255, 0.19);
+      border-radius: 15px;
+      padding: 1.25rem;
+    }
+
+    .liquid-glass-card {
+      background: rgba(11, 25, 44, 0.84);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.23);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-panel .console-card {
+      position: absolute;
+      left: -2.2rem;
+      right: 2rem;
+      bottom: 0;
+    }
+
+    .console-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      color: var(--gold-light);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+    }
+
+    .console-header > span {
+      color: #dcf5e7;
+      letter-spacing: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      text-transform: none;
+    }
+
+    .console-card h2, 
+    .console-card h3 {
+      font-size: 1.15rem;
+      line-height: 1.45;
+      margin: 1rem 0;
+      color: #fff;
+    }
+
+    .console-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+      color: #d7e4f0;
+      font-size: 0.82rem;
+    }
+
+    .console-grid span {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .console-grid i {
+      color: var(--gold-light);
+    }
+
+    /* --- Sections & Components --- */
+    .section {
+      padding: 6rem 0;
+    }
+
+    .section-soft {
+      background: var(--soft);
+    }
+
+    .section-title {
+      margin: 0.65rem 0 1rem;
+      font-size: clamp(1.95rem, 3.5vw, 3.1rem);
+      line-height: 1.15;
+      letter-spacing: -0.05em;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .split-layout > .reveal > .section-lead {
+      max-width: 620px;
+    }
+
+    .center-head {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .center-head .eyebrow {
+      justify-content: center;
+    }
+
+    .center-head .section-lead {
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: end;
+      gap: 3rem;
+      margin-bottom: 2.6rem;
+    }
+
+    .section-head .section-lead {
+      margin: 0;
+    }
+
+    /* --- Signal Strip --- */
+    .signal-strip {
+      background: #fff;
+      position: relative;
+      z-index: 2;
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-inline: 1px solid var(--line);
+    }
+
+    .signal-card {
+      display: flex;
+      gap: 0.85rem;
+      padding: 1.5rem 1rem;
+      border-right: 1px solid var(--line);
+    }
+
+    .signal-card:last-child {
+      border-right: 0;
+    }
+
+    .signal-card > i {
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin-top: 0.12rem;
+    }
+
+    .signal-card h2 {
+      font-size: 0.84rem;
+      margin: 0 0 0.2rem;
+    }
+
+    .signal-card p {
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* --- Prestige Band --- */
+    .prestige-band {
+      overflow: hidden;
+      background: #f0ede5;
+      border-block: 1px solid #e2d9c8;
+    }
+
+    .prestige-rail {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      width: max-content;
+      min-width: 100%;
+      padding: 0.85rem 1.5rem;
+      color: #5e4a27;
+      font-size: 0.78rem;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .prestige-rail span {
+      display: inline-flex;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .prestige-rail i {
+      color: #aa812f;
+    }
+
+    /* --- Text Links --- */
+    .intro-actions {
+      display: flex;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .text-link {
+      color: var(--ink);
+      font-size: 0.89rem;
+      font-weight: 800;
+    }
+
+    .text-link i {
+      color: var(--gold);
+      margin-left: 0.2rem;
+    }
+
+    .text-link.muted {
+      color: var(--muted);
+    }
+
+    /* --- Mission Grids --- */
+    .mission-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .mission-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.55rem;
+      box-shadow: 0 10px 26px rgba(11, 25, 44, 0.05);
+    }
+
+    .mission-card + .mission-card {
+      margin-top: 1rem;
+    }
+
+    .mission-card > i {
+      color: var(--gold);
+      font-size: 1.3rem;
+    }
+
+    .mission-card small {
+      display: block;
+      margin-top: 0.9rem;
+      color: #9c742f;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      font-size: 0.67rem;
+      font-weight: 850;
+    }
+
+    .mission-card h3 {
+      margin: 0.45rem 0 0.65rem;
+      line-height: 1.35;
+      font-size: 1.11rem;
+    }
+
+    .mission-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* --- Metrics Grid --- */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .metric-card {
+      min-height: 155px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .metric-card strong {
+      color: var(--gold);
+      font-size: 1.6rem;
+      letter-spacing: -0.05em;
+    }
+
+    .metric-card span {
+      max-width: 150px;
+      font-weight: 750;
+      line-height: 1.3;
+    }
+
+    /* --- Courses Grid --- */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.35rem;
+    }
+
+    .course-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(11, 25, 44, 0.04);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .course-image {
+      position: relative;
+      aspect-ratio: 1.7;
+      overflow: hidden;
+    }
+
+    .course-image:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(4, 15, 28, 0.32));
+    }
+
+    .course-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .course-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .course-image span {
+      position: absolute;
+      z-index: 1;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.35rem 0.55rem;
+      border-radius: 5px;
+      background: rgba(11, 25, 44, 0.85);
+      color: var(--gold-light);
+      font-size: 0.68rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .course-body {
+      padding: 1.35rem;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .course-body h3 {
+      font-size: 1.1rem;
+      line-height: 1.35;
+      margin: 0 0 0.7rem;
+    }
+
+    .course-body h3 em {
+      display: block;
+      margin-top: 0.18rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    .course-body p {
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
+    .course-body ul {
+      padding: 0;
+      margin: 0.45rem 0 1.25rem;
+      list-style: none;
+      display: grid;
+      gap: 0.5rem;
+      color: #435269;
+      font-size: 0.8rem;
+    }
+
+    .course-body li {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .course-body li i {
+      color: #aa812f;
+      margin-top: 0.26rem;
+    }
+
+    .course-body > a {
+      margin-top: auto;
+      color: var(--ink);
+      font-size: 0.83rem;
+      font-weight: 850;
+    }
+
+    .course-body > a i {
+      color: var(--gold);
+      margin-left: 0.2rem;
+    }
+
+    .course-body .btn {
+      width: 100%;
+      margin-top: auto;
+      font-size: 0.82rem;
+    }
+
+    .section-soft .course-card {
+      border-color: #e4e8ef;
+    }
+
+    .section-soft .course-body .btn {
+      background: #0b192c;
+    }
+
+    /* --- Success Grid --- */
+    .success-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.35rem;
+    }
+
+    .success-card {
+      position: relative;
+      border-left: 3px solid var(--gold);
+      padding: 1.55rem;
+      background: #fff;
+      box-shadow: 0 7px 20px rgba(11, 25, 44, 0.05);
+    }
+
+    .quote-mark {
+      color: #e7dbbd;
+      font-size: 4rem;
+      line-height: 0.7;
+      font-family: Georgia, serif;
+    }
+
+    .success-card h3 {
+      margin: 0.65rem 0;
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+
+    .success-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .success-card span {
+      font-size: 0.73rem;
+      color: #91702e;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    /* --- Methodology Section --- */
+    .methodology-section {
+      background: linear-gradient(135deg, #071625, #0f3151);
+      color: #fff;
+    }
+
+    .methodology-section .section-lead {
+      color: #c2d5e8;
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+      border-left: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .method-card {
+      position: relative;
+      min-height: 230px;
+      padding: 1.55rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.16);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .method-card > span {
+      position: absolute;
+      right: 1.2rem;
+      top: 1.15rem;
+      color: rgba(228, 197, 130, 0.35);
+      font-size: 1.7rem;
+      font-weight: 800;
+    }
+
+    .method-card > i {
+      font-size: 1.35rem;
+      color: var(--gold-light);
+    }
+
+    .method-card h3 {
+      margin: 1.25rem 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .method-card p {
+      color: #bacbdd;
+      font-size: 0.84rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* --- Phase Stack (Learning Rhythm) --- */
+    .phase-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .phase-card {
+      display: grid;
+      grid-template-columns: 100px 1fr 270px;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.4rem 1.6rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .phase-card:hover {
+      box-shadow: var(--shadow);
+    }
+
+    .phase-number {
+      font-size: 2.25rem;
+      color: #d7c497;
+      font-weight: 850;
+      letter-spacing: -0.08em;
+    }
+
+    .phase-label {
+      color: #9c742f;
+      font-size: 0.68rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .phase-content h3 {
+      margin: 0.28rem 0 0.45rem;
+      font-size: 1.12rem;
+    }
+
+    .phase-content p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .phase-list {
+      display: grid;
+      gap: 0.45rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      color: #4b5b71;
+      font-size: 0.79rem;
+    }
+
+    .phase-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .phase-list i {
+      color: #aa812f;
+    }
+
+    /* --- Pathway & Admissions Grids --- */
+    .pathway-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      counter-reset: path;
+    }
+
+    .path-card {
+      padding: 1.5rem;
+      border-radius: 14px;
+      border: 1px solid #e1e5ea;
+      background: #fff;
+    }
+
+    .path-card > span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 31px;
+      height: 31px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--gold-light);
+      font-size: 0.8rem;
+      font-weight: 850;
+    }
+
+    .path-card h3 {
+      margin: 1.1rem 0 0.45rem;
+      font-size: 1rem;
+    }
+
+    .path-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .admissions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .admission-card {
+      padding: 1.5rem;
+      border-top: 3px solid var(--gold);
+      background: #f8fafc;
+    }
+
+    .admission-card > span {
+      color: #b28a3e;
+      font-weight: 850;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    .admission-card h3 {
+      margin: 0.9rem 0 0.45rem;
+      font-size: 1rem;
+    }
+
+    .admission-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* --- Contact Section & Form --- */
+    .contact-layout {
+      margin-top: 2rem;
+    }
+
+    .contact-layout .mission-card {
+      box-shadow: none;
+    }
+
+    .contact-detail {
+      font-size: 1.01rem !important;
+      font-weight: 750;
+      margin: 0.4rem 0 !important;
+    }
+
+    .contact-detail a {
+      color: var(--ink);
+      overflow-wrap: anywhere;
+    }
+
+    .form-card {
+      align-self: stretch;
+      background: #0b192c;
+    }
+
+    .form-card h3 {
+      font-size: 1.45rem;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .form-card form {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .form-card label {
+      margin-top: 0;
+    }
+
     /* =========================================================
        Timetables page liquid-glass extension
        Works with the main style.css design system.
@@ -981,7 +2288,7 @@
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-    }
+      }
 
       .time-pill {
         width: fit-content;
@@ -1191,559 +2498,13 @@
             <div class="calendar-highlight">
               <i class="fas fa-table" aria-hidden="true"></i>
               <span>
-                <strong>Structured layout</strong>
-                <span>Each module maintains its own definitive, day-by-day itinerary.</span>
-              </span>
-            </div>
-
-            <div class="calendar-highlight">
-              <i class="fas fa-file-pen" aria-hidden="true"></i>
-              <span>
-                <strong>Execution discipline</strong>
-                <span>Sessions comprehensively support instruction, application, and targeted correction.</span>
-              </span>
-            </div>
-
-            <div class="calendar-highlight">
-              <i class="fas fa-headset" aria-hidden="true"></i>
-              <span>
-                <strong>Support infrastructure</strong>
-                <span>Utilize WhatsApp, email, or the portal for direct access guidance.</span>
+                <strong>Structured</strong>
               </span>
             </div>
           </div>
         </aside>
       </div>
     </section>
-
-    <section class="timetable-section section-white" aria-label="Quick timetable overview">
-      <div class="container">
-        <div class="quick-grid">
-          <article class="quick-card reveal">
-            <i class="fas fa-layer-group" aria-hidden="true"></i>
-            <h3>Select your discipline</h3>
-            <p>AAA and SBR are deliberately isolated to definitively prevent scheduling overlap and confusion.</p>
-          </article>
-
-          <article class="quick-card reveal">
-            <i class="fas fa-moon" aria-hidden="true"></i>
-            <h3>Optimized for professionals</h3>
-            <p>The timetable is structurally anchored in evening study, ensuring absolute practicality for working professionals.</p>
-          </article>
-
-          <article class="quick-card reveal">
-            <i class="fas fa-video" aria-hidden="true"></i>
-            <h3>Engage live, review on demand</h3>
-            <p>While live attendance is paramount, comprehensive recordings ensure seamless revision and continuity.</p>
-          </article>
-
-          <article class="quick-card reveal">
-            <i class="fas fa-bullseye" aria-hidden="true"></i>
-            <h3>Strategic objective alignment</h3>
-            <p>Every class is strategically engineered for technical instruction, practical application, targeted feedback, or exam conditioning.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="timetable-section section-soft" id="paper-timetables">
-      <div class="container">
-        <div class="timetable-head reveal">
-          <div class="eyebrow"><span></span> Paper Timetables</div>
-          <h2>Select your module to review the definitive schedule.</h2>
-          <p>
-            Choose a discipline below. Each schedule details the designated day, commencement time, instructional objective, and required preparation parameters.
-          </p>
-        </div>
-
-        <div class="paper-tabs" role="tablist" aria-label="ACCA paper timetable selector">
-          <button class="paper-tab" type="button" role="tab" aria-selected="true" aria-controls="aaa-panel" id="aaa-tab">
-            AAA Advanced Audit
-          </button>
-          <button class="paper-tab" type="button" role="tab" aria-selected="false" aria-controls="sbr-panel" id="sbr-tab">
-            SBR Strategic Reporting
-          </button>
-        </div>
-
-        <section class="paper-panel active" id="aaa-panel" role="tabpanel" aria-labelledby="aaa-tab">
-          <div class="paper-panel-head">
-            <div>
-              <span class="paper-kicker"><i class="fas fa-shield-halved" aria-hidden="true"></i> AAA Stream</span>
-              <h3>Advanced Audit and Assurance</h3>
-              <p>
-                AAA demands advanced audit judgment, ethical reasoning, precise risk assessment, and examiner-focused articulation.
-                The rhythm below enforces practical mastery: internalize the principle, apply it to complex scenarios, and refine your written technique.
-              </p>
-            </div>
-
-            <div class="paper-summary">
-              <div>
-                <strong>Class days</strong>
-                <span>Monday, Wednesday and Friday</span>
-              </div>
-              <div>
-                <strong>Start time</strong>
-                <span>20:00 CAT</span>
-              </div>
-              <div>
-                <strong>Main student action</strong>
-                <span>Prepare scenarios, attempt simulations, and submit written execution.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="table-scroll">
-            <table class="timetable-table">
-              <caption>AAA December 2026 weekly timetable</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Day</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Class Purpose</th>
-                  <th scope="col">Student Preparation</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-label="Day">Monday</td>
-                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
-                  <td data-label="Class Purpose">Technical instruction: audit principles, ethical frameworks, ISA logic, quality management, and core concept deconstruction.</td>
-                  <td data-label="Student Preparation">Review the syllabus outline prior to class and prepare targeted questions.</td>
-                </tr>
-                <tr>
-                  <td data-label="Day">Wednesday</td>
-                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
-                  <td data-label="Class Purpose">Scenario analysis: audit risk, business risk, materiality calibration, procedures, and professional script construction.</td>
-                  <td data-label="Student Preparation">Analyze short scenario extracts and practice translating facts into mark-earning points.</td>
-                </tr>
-                <tr>
-                  <td data-label="Day">Friday</td>
-                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
-                  <td data-label="Class Purpose">Execution and feedback: script evaluation, targeted correction, timing discipline, and revision strategy.</td>
-                  <td data-label="Student Preparation">Submit required written assignments and review comprehensive corrections prior to the session.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="paper-note">
-            <strong>Direct guidance:</strong> AAA demands active execution. Prioritize live attendance, draft comprehensive answers, and rigorously refine your narrative style early in the cycle.
-          </div>
-        </section>
-
-        <section class="paper-panel" id="sbr-panel" role="tabpanel" aria-labelledby="sbr-tab" hidden>
-          <div class="paper-panel-head">
-            <div>
-              <span class="paper-kicker"><i class="fas fa-chart-line" aria-hidden="true"></i> SBR Stream</span>
-              <h3>Strategic Business Reporting</h3>
-              <p>
-                SBR requires uncompromising IFRS clarity, sound professional judgment, and the capacity to articulate reporting consequences.
-                This schedule deliberately separates technical acquisition from written application to ensure absolute proficiency.
-              </p>
-            </div>
-
-            <div class="paper-summary">
-              <div>
-                <strong>Class days</strong>
-                <span>Tuesday, Thursday and Friday</span>
-              </div>
-              <div>
-                <strong>Start times</strong>
-                <span>Tuesday, Thursday and Friday at 20:00 CAT</span>
-              </div>
-              <div>
-                <strong>Main student action</strong>
-                <span>Internalize IFRS mechanics before class and practice executing clear, professional explanations.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="table-scroll">
-            <table class="timetable-table">
-              <caption>SBR December 2026 weekly timetable</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Day</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Class Purpose</th>
-                  <th scope="col">Student Preparation</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-label="Day">Tuesday</td>
-                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
-                  <td data-label="Class Purpose">IFRS technical instruction: recognition, measurement, presentation, and comprehensive disclosure principles.</td>
-                  <td data-label="Student Preparation">Review the designated standard prior to class and isolate any ambiguous technical treatments.</td>
-                </tr>
-                <tr>
-                  <td data-label="Day">Thursday</td>
-                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
-                  <td data-label="Class Purpose">Scenario application: applying IFRS frameworks to complex transactions and articulating the precise reporting impact.</td>
-                  <td data-label="Student Preparation">Draft concise, professional written explanations, rather than relying solely on numerical calculation.</td>
-                </tr>
-                <tr>
-                  <td data-label="Day">Friday</td>
-                  <td data-label="Time"><span class="time-pill"><i class="fas fa-clock" aria-hidden="true"></i> 20:00 CAT</span></td>
-                  <td data-label="Class Purpose">Execution clinic: resolving reporting deficiencies, correcting weak narratives, and elevating professional discussion standards.</td>
-                  <td data-label="Student Preparation">Submit attempted exam scenarios and clearly identify areas of conceptual friction.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="paper-note">
-            <strong>Direct guidance:</strong> SBR rewards authoritative explanation. Transcend standard memorization; rigorously practice writing the accounting treatment in commanding, professional language.
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <section class="timetable-section section-white">
-      <div class="container">
-        <div class="timetable-head reveal">
-          <div class="eyebrow"><span></span> Learning Rhythm</div>
-          <h2>The curriculum dictates a deliberate academic rhythm.</h2>
-          <p>
-            The weekly structure is meticulously planned. Candidates progress logically from technical instruction, to practical execution, to rigorous correction and strategic revision.
-          </p>
-        </div>
-
-        <div class="phase-clean-grid">
-          <article class="phase-card-clean reveal">
-            <span>01</span>
-            <h3>Engage and comprehend</h3>
-            <p>Your primary objective is to attend sessions and definitively master the underlying technical mechanics.</p>
-            <ul>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Connect to live sessions promptly</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Compile structured, authoritative notes</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Interrogate ambiguous concepts immediately</li>
-            </ul>
-          </article>
-
-          <article class="phase-card-clean reveal">
-            <span>02</span>
-            <h3>Execute and submit</h3>
-            <p>True progression occurs when you draft comprehensive solutions and submit them for rigorous evaluation.</p>
-            <ul>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Execute exam-standard simulations</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Submit written responses for evaluation</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Eradicate identified technical weaknesses</li>
-            </ul>
-          </article>
-
-          <article class="phase-card-clean reveal">
-            <span>03</span>
-            <h3>Refine and control pace</h3>
-            <p>The final phase demands execution speed, unwavering confidence, strict exam discipline, and the elimination of recurring errors.</p>
-            <ul>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Systematically review session recordings</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Execute simulations under strict time parameters</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Rectify persistent mechanical errors</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="timetable-section section-soft" id="documents">
-      <div class="container">
-        <div class="timetable-head reveal">
-          <div class="eyebrow"><span></span> Official Timetable Links</div>
-          <h2>Navigate directly to your discipline.</h2>
-          <p>
-            Select your relevant module below to immediately access the authoritative schedule.
-          </p>
-        </div>
-
-        <div class="document-grid">
-          <article class="document-card reveal">
-            <span class="document-icon"><i class="fas fa-file-lines" aria-hidden="true"></i></span>
-            <h3>AAA December 2026 Timetable</h3>
-            <p>Advanced Audit and Assurance sessions execute on Monday, Wednesday, and Friday at 20:00 CAT.</p>
-            <a href="#aaa-panel" data-paper-link="aaa">
-              Review AAA schedule <i class="fas fa-arrow-right" aria-hidden="true"></i>
-            </a>
-          </article>
-
-          <article class="document-card reveal">
-            <span class="document-icon"><i class="fas fa-file-lines" aria-hidden="true"></i></span>
-            <h3>SBR December 2026 Timetable</h3>
-            <p>Strategic Business Reporting sessions execute on Tuesday, Thursday, and Friday evenings.</p>
-            <a href="#sbr-panel" data-paper-link="sbr">
-              Review SBR schedule <i class="fas fa-arrow-right" aria-hidden="true"></i>
-            </a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="timetable-section section-white">
-      <div class="container">
-        <div class="timetable-head reveal">
-          <div class="eyebrow"><span></span> Student Discipline</div>
-          <h2>Treat the timetable as a binding commitment, not a mere reference.</h2>
-          <p>
-            Elite candidates demand more than passive attendance. They prepare proactively, engage aggressively, review systematically, and execute constantly.
-          </p>
-        </div>
-
-        <div class="discipline-grid">
-          <article class="discipline-card reveal">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <h3>Connect promptly</h3>
-            <p>Establish your connection prior to commencement to secure the foundational technical briefing.</p>
-          </article>
-
-          <article class="discipline-card reveal">
-            <i class="fas fa-video" aria-hidden="true"></i>
-            <h3>Review complex concepts</h3>
-            <p>Leverage full session recordings for targeted revision and the reinforcement of complex technical mechanics.</p>
-          </article>
-
-          <article class="discipline-card reveal">
-            <i class="fas fa-pen-nib" aria-hidden="true"></i>
-            <h3>Draft responses</h3>
-            <p>Passive listening yields understanding; rigorous written execution yields success.</p>
-          </article>
-
-          <article class="discipline-card reveal">
-            <i class="fas fa-lock" aria-hidden="true"></i>
-            <h3>Safeguard credentials</h3>
-            <p>Access links, session archives, and proprietary materials remain strictly restricted to enrolled candidates.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="timetable-section section-soft">
-      <div class="container support-layout">
-        <div class="support-panel reveal">
-          <div class="eyebrow light"><span></span> Student Support</div>
-          <h2>
-            Require scheduling
-            <span>clarification?</span>
-          </h2>
-          <p>
-            Provide your name, chosen ACCA module, and target exam session. You will receive precise guidance regarding your designated class stream,
-            portal authorization, and immediate preparatory requirements.
-          </p>
-
-          <div class="support-links">
-            <a href="mailto:lloyd.shumba@excelbusinessschool.uk" class="btn btn-primary">
-              Email Support <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-            </a>
-            <a href="https://wa.me/260975899280" target="_blank" rel="noopener" class="btn btn-secondary">
-              WhatsApp Support <i class="fab fa-whatsapp" aria-hidden="true"></i>
-            </a>
-            <a href="portal.html" class="btn btn-secondary">
-              Student Portal <i class="fas fa-user-graduate" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="support-grid">
-          <article class="support-card reveal">
-            <i class="fas fa-calendar-check" aria-hidden="true"></i>
-            <h3>Verify your schedule</h3>
-            <p>Confirm your specific module, designated days, and exact commencement parameters before the initial session.</p>
-          </article>
-
-          <article class="support-card reveal">
-            <i class="fas fa-laptop" aria-hidden="true"></i>
-            <h3>Utilize the portal</h3>
-            <p>Access the proprietary portal for secure entry to sessions and exclusive academic materials.</p>
-          </article>
-
-          <article class="support-card reveal">
-            <i class="fas fa-book-open-reader" aria-hidden="true"></i>
-            <h3>Prepare thoroughly</h3>
-            <p>Identify and secure required reading materials well ahead of schedule to maintain operational pace.</p>
-          </article>
-        </div>
-      </div>
-    </section>
   </main>
-
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <a href="index.html" class="footer-brand">
-          <img src="excel-logo.png" width="82" height="58" alt="Excel Business School" />
-          <span>
-            <strong>Excel Business School</strong>
-            <em>December 2026 Timetables</em>
-          </span>
-        </a>
-        <p>Premium ACCA tuition for ambitious candidates and working professionals demanding technical mastery, absolute exam discipline, and rigorous academic support.</p>
-      </div>
-
-      <div>
-        <h3>Programmes</h3>
-        <a href="aaa-course-outline.html">AAA Course Outline</a>
-        <a href="sbr-course-outline.html">SBR Course Outline</a>
-      </div>
-
-      <div>
-        <h3>Institution</h3>
-        <a href="index.html#about">About</a>
-        <a href="index.html#governance">Governance</a>
-        <a href="index.html#student-resources">Resources</a>
-        <a href="timetables.html">Timetables</a>
-      </div>
-
-      <div>
-        <h3>Access</h3>
-        <a href="portal.html">Student Portal</a>
-        <a href="index.html#sample-lectures">Sample Lectures</a>
-        <a href="https://forms.cloud.microsoft/r/p2SFWwXme2" target="_blank" rel="noopener">Apply Now</a>
-        <a href="mailto:lloyd.shumba@excelbusinessschool.uk">Support Desk</a>
-      </div>
-    </div>
-
-    <div class="container footer-bottom">
-      <span>© <span id="year"></span> Excel Business School. All rights reserved.</span>
-      <span>www.excelbusinessschool.uk</span>
-    </div>
-  </footer>
-
-  <script>
-    (function () {
-      const menuBtn = document.getElementById('menuBtn');
-      const closeBtn = document.getElementById('closeBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const mobileBackdrop = document.getElementById('mobileBackdrop');
-      const mobileLinks = document.querySelectorAll('.mobile-links a');
-      const yearElement = document.getElementById('year');
-
-      function openMenu() {
-        if (!mobileMenu || !mobileBackdrop || !menuBtn) return;
-
-        mobileMenu.classList.add('open');
-        mobileBackdrop.classList.add('open');
-        mobileMenu.setAttribute('aria-hidden', 'false');
-        mobileBackdrop.setAttribute('aria-hidden', 'false');
-        menuBtn.setAttribute('aria-expanded', 'true');
-        document.body.classList.add('menu-open');
-
-        const firstLink = mobileMenu.querySelector('a, button');
-        if (firstLink) firstLink.focus({ preventScroll: true });
-      }
-
-      function closeMenu() {
-        if (!mobileMenu || !mobileBackdrop || !menuBtn) return;
-
-        mobileMenu.classList.remove('open');
-        mobileBackdrop.classList.remove('open');
-        mobileMenu.setAttribute('aria-hidden', 'true');
-        mobileBackdrop.setAttribute('aria-hidden', 'true');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('menu-open');
-      }
-
-      if (menuBtn) menuBtn.addEventListener('click', openMenu);
-      if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-      if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMenu);
-      mobileLinks.forEach((link) => link.addEventListener('click', closeMenu));
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') closeMenu();
-      });
-
-      const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
-
-      if (dropdownToggle) {
-        dropdownToggle.addEventListener('focus', () => dropdownToggle.setAttribute('aria-expanded', 'true'));
-        dropdownToggle.addEventListener('blur', () => dropdownToggle.setAttribute('aria-expanded', 'false'));
-      }
-
-      const tabs = Array.from(document.querySelectorAll('.paper-tab'));
-      const panels = Array.from(document.querySelectorAll('.paper-panel'));
-
-      function activatePaper(paperKey, shouldFocusTab) {
-        const targetTab = document.getElementById(`${paperKey}-tab`);
-        const targetPanel = document.getElementById(`${paperKey}-panel`);
-
-        if (!targetTab || !targetPanel) return;
-
-        tabs.forEach((tab) => {
-          const isSelected = tab === targetTab;
-          tab.setAttribute('aria-selected', String(isSelected));
-          tab.setAttribute('tabindex', isSelected ? '0' : '-1');
-        });
-
-        panels.forEach((panel) => {
-          const isActive = panel === targetPanel;
-          panel.classList.toggle('active', isActive);
-          panel.hidden = !isActive;
-        });
-
-        if (shouldFocusTab) targetTab.focus();
-      }
-
-      tabs.forEach((tab, index) => {
-        tab.setAttribute('tabindex', tab.getAttribute('aria-selected') === 'true' ? '0' : '-1');
-
-        tab.addEventListener('click', () => {
-          const paperKey = tab.id.replace('-tab', '');
-          activatePaper(paperKey, false);
-        });
-
-        tab.addEventListener('keydown', (event) => {
-          const keyMap = {
-            ArrowRight: 1,
-            ArrowDown: 1,
-            ArrowLeft: -1,
-            ArrowUp: -1
-          };
-
-          if (!(event.key in keyMap)) return;
-
-          event.preventDefault();
-          const nextIndex = (index + keyMap[event.key] + tabs.length) % tabs.length;
-          const paperKey = tabs[nextIndex].id.replace('-tab', '');
-          activatePaper(paperKey, true);
-        });
-      });
-
-      document.querySelectorAll('[data-paper-link]').forEach((link) => {
-        link.addEventListener('click', (event) => {
-          const paperKey = link.getAttribute('data-paper-link');
-          const panel = document.getElementById(`${paperKey}-panel`);
-
-          activatePaper(paperKey, false);
-
-          if (panel) {
-            event.preventDefault();
-            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
-
-      const hashPaper = window.location.hash.replace('#', '').replace('-panel', '');
-      if (['aaa', 'sbr'].includes(hashPaper)) {
-        activatePaper(hashPaper, false);
-      }
-
-      const revealItems = document.querySelectorAll('.reveal');
-
-      if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in-view');
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15 });
-
-        revealItems.forEach((item) => revealObserver.observe(item));
-      } else {
-        revealItems.forEach((item) => item.classList.add('in-view'));
-      }
-
-      if (yearElement) yearElement.textContent = new Date().getFullYear();
-    })();
-  </script>
 </body>
 </html>
