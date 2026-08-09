@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,9 +63,6 @@
       "description": "Elite ACCA tuition for driven professionals.",
       "email": "lloyd.shumba@excelbusinessschool.uk",
       "telephone": "+260975899280",
-      "sameAs": [
-        "https://www.excelbusinessschool.uk/"
-      ],
       "offers": {
         "@type": "Offer",
         "category": "ACCA Tuition",
@@ -904,8 +900,25 @@
       const mobileLinks = document.querySelectorAll('.mobile-links a');
       mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
 
+      // Desktop dropdown accessibility toggle handler
+      const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
+      const dropdownMenu = document.querySelector('.nav-dropdown-menu');
+      if (dropdownToggle && dropdownMenu) {
+        dropdownToggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const expanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+          dropdownToggle.setAttribute('aria-expanded', !expanded);
+        });
+        document.addEventListener('click', function () {
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+        });
+      }
+
       document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') closeMenu();
+        if (event.key === 'Escape') {
+          closeMenu();
+          if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
+        }
       });
 
       const observerOptions = {
@@ -930,5 +943,3 @@
   </script>
 </body>
 </html>
-
-```
