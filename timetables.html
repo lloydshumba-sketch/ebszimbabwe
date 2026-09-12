@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Excel Business School December 2026 ACCA timetables for AAA, SBR and ATX. AAA classes run on Monday, Wednesday and Friday at 20:00. SBR classes run on Tuesday, Thursday and Saturday at 20:00."
+    content="Excel Business School December 2026 ACCA timetables for AAA, SBR and ATX. AAA classes run on Monday, Wednesday and Friday at 20:00 CAT (UTC+2). SBR classes run on Tuesday, Thursday and Saturday at 20:00 CAT (UTC+2)."
   />
 
   <meta name="theme-color" content="#081728" />
@@ -20,7 +20,7 @@
   <meta property="og:title" content="December 2026 Class | Excel Business School" />
   <meta
     property="og:description"
-    content="View Excel Business School December 2026 ACCA class structure for AAA, SBR and ATX students, including AAA and SBR weekly class times. Live online tuition, recorded access, marked practice and revision discipline."
+    content="View Excel Business School December 2026 ACCA class structure for AAA, SBR and ATX students, including AAA and SBR weekly class times. Live online tuition, lesson recordings, marked practice and focused revision."
   />
   <meta property="og:url" content="https://www.ebszimbabwe.online/timetables.html" />
   <meta property="og:image" content="https://www.ebszimbabwe.online/excel-logo.png" />
@@ -39,7 +39,6 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://images.unsplash.com" />
 
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
@@ -303,7 +302,7 @@
     }
 
     .brand-text,
-    .footer-brand span {
+    .footer-brand > span:not(.footer-brand-badge) {
       display: flex;
       flex-direction: column;
       line-height: 1.1;
@@ -1010,7 +1009,7 @@
       line-height: 1.2;
     }
 
-    .tab-button span {
+    .tab-button > span:not(.tab-icon) > span {
       display: block;
       margin-top: 5px;
       color: var(--muted);
@@ -1020,7 +1019,7 @@
       letter-spacing: 0.08em;
     }
 
-    .tab-button[aria-selected="true"] span {
+    .tab-button[aria-selected="true"] > span:not(.tab-icon) > span {
       color: rgba(255, 255, 255, 0.72);
     }
 
@@ -1134,6 +1133,7 @@
 
     .schedule-head {
       display: flex;
+      flex-wrap: wrap;
       align-items: flex-start;
       justify-content: space-between;
       gap: 18px;
@@ -1177,7 +1177,7 @@
 
     .schedule-row {
       display: grid;
-      grid-template-columns: 145px minmax(0, 1fr) 125px;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 18px;
       align-items: center;
       padding: 18px;
@@ -1190,6 +1190,16 @@
       color: var(--burgundy);
       font-weight: 900;
       letter-spacing: -0.02em;
+    }
+
+    .schedule-content {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+
+    .schedule-time {
+      grid-column: 2;
+      grid-row: 1;
     }
 
     .schedule-content strong {
@@ -1645,6 +1655,12 @@
         align-items: start;
       }
 
+      .schedule-content,
+      .schedule-time {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
       .schedule-time {
         justify-self: start;
       }
@@ -1754,7 +1770,49 @@
       .schedule-row { break-inside: avoid; }
       body { overflow: visible; }
     }
+
+    .tab-button > span:not(.tab-icon) { min-width: 0; }
+    .tab-button strong { color: inherit; }
+    .tab-button > span:not(.tab-icon) > span {
+      text-transform: none;
+      letter-spacing: 0;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+    .paper-card h3 { font-size: clamp(1.8rem, 2.8vw, 2.8rem); line-height: 1.12; }
+    .schedule-head > div { flex: 1 1 230px; min-width: 0; }
+    .schedule-badge { flex-shrink: 0; }
+    .schedule-content { overflow-wrap: anywhere; }
+    .footer-brand { min-width: 0; max-width: 100%; }
+    .footer-brand > span:not(.footer-brand-badge) { min-width: 0; }
+    .footer-brand strong { line-height: 1.3; }
+    .footer-brand-badge { overflow: hidden; }
+    .footer-brand-badge img { mix-blend-mode: multiply; }
+    .footer-bottom { color: rgba(255, 255, 255, 0.72); }
+    .mobile-links a[aria-current="page"] { background: var(--gold-soft); }
+    .timetable-panel { margin-bottom: 28px; }
+    .timetable-panel:focus-visible { outline: 3px solid var(--burgundy); outline-offset: 6px; }
+    .no-script-nav { display: flex; flex-wrap: wrap; gap: 16px; padding-block: 16px; }
+    .no-script-nav a { text-decoration: underline; font-weight: 700; }
+    @media print {
+      html { scroll-behavior: auto; }
+      body, .section, .timetable-hero, .footer, .support-panel { background: white !important; color: black !important; }
+      main *, .footer * { color: black !important; text-shadow: none !important; box-shadow: none !important; }
+      .hero-panel, .command-grid, #documents, #rules, #support, .footer { display: none !important; }
+      .timetable-hero, .section { padding: 20px 0 !important; }
+      .hero-inner { display: block; }
+      .hero-copy h1 { font-size: 30pt; letter-spacing: -0.03em; }
+      .paper-card, .schedule-card { overflow: visible; padding: 16px; border: 1px solid #aaa; }
+      .paper-card h3, .section-title { font-size: 20pt; }
+      .timetable-panel { break-before: page; }
+      .schedule-head, .paper-fact { break-inside: avoid; }
+      .schedule-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+      .schedule-time { grid-column: 2; grid-row: 1; }
+      .schedule-content { grid-column: 1 / -1; grid-row: 2; }
+      .hero-panel::before, .timetable-hero::before, .timetable-hero::after { display: none; }
+    }
   </style>
+  <noscript><style>.menu-btn { display: none !important; }</style></noscript>
 </head>
 
 <body>
@@ -1961,7 +2019,7 @@
         </svg>
       </a>
 
-      <a href="timetables.html">
+      <a href="timetables.html" aria-current="page">
         Timetables
         <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
           <rect x="3" y="5" width="18" height="16" rx="2"></rect>
@@ -1983,7 +2041,17 @@
     </div>
   </aside>
 
-  <main id="main-content">
+  <noscript>
+    <nav class="container no-script-nav" aria-label="Site navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#courses">Courses</a>
+      <a href="index.html#admissions">Admissions</a>
+      <a href="portal.html">Student Portal</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </noscript>
+
+  <main id="main-content" tabindex="-1">
 
     <section class="timetable-hero" id="home">
       <div class="container hero-inner">
@@ -1995,14 +2063,14 @@
           </div>
 
           <h1>
-            Timetables built for
-            <span>serious exam execution.</span>
+            Your December 2026
+            <span>class timetables.</span>
           </h1>
 
           <p>
             View the Excel Business School timetable structure for AAA, SBR and ATX.
-            The schedule is designed around evening tuition, recorded access, marked
-            practice, assignment discipline and revision control for ambitious ACCA candidates.
+            Plan your week around live evening tuition, lesson recordings, marked
+            assignments and focused exam preparation.
           </p>
 
           <div class="hero-actions">
@@ -2132,11 +2200,11 @@
         <div class="section-head reveal">
           <div class="eyebrow">
             <span></span>
-            Timetable Command Centre
+            Your Study Schedule
           </div>
 
           <h2 class="section-title">
-            One timetable. Three papers. <span>One disciplined system.</span>
+            Three papers. Clear schedules. <span>Focused preparation.</span>
           </h2>
 
           <p class="section-lead">
@@ -2170,7 +2238,7 @@
             <strong>Live + Recorded</strong>
 
             <span>
-              Attend live lessons and use recordings as controlled revision support.
+              Attend live lessons and use recordings as revision support.
             </span>
           </article>
 
@@ -2214,7 +2282,7 @@
           </div>
 
           <h2 class="section-title">
-            Select your paper and <span>follow the rhythm.</span>
+            Select your paper and <span>view your timetable.</span>
           </h2>
 
           <p class="section-lead">
@@ -2223,14 +2291,12 @@
           </p>
         </div>
 
-        <div class="timetable-tabs" role="tablist" aria-label="ACCA paper timetables">
+        <div class="timetable-tabs" aria-label="ACCA paper timetables">
 
           <button
             class="tab-button"
             id="tab-aaa"
             type="button"
-            role="tab"
-            aria-selected="true"
             aria-controls="panel-aaa"
           >
             <span class="tab-icon">
@@ -2250,8 +2316,6 @@
             class="tab-button"
             id="tab-sbr"
             type="button"
-            role="tab"
-            aria-selected="false"
             aria-controls="panel-sbr"
           >
             <span class="tab-icon">
@@ -2273,8 +2337,6 @@
             class="tab-button"
             id="tab-atx"
             type="button"
-            role="tab"
-            aria-selected="false"
             aria-controls="panel-atx"
           >
             <span class="tab-icon">
@@ -2293,7 +2355,7 @@
 
         </div>
 
-        <div class="timetable-panel active" id="panel-aaa" role="tabpanel" aria-labelledby="tab-aaa">
+        <div class="timetable-panel active" id="panel-aaa" role="region" aria-labelledby="tab-aaa">
 
           <div class="paper-dashboard">
 
@@ -2432,7 +2494,7 @@
           </div>
         </div>
 
-        <div class="timetable-panel" id="panel-sbr" role="tabpanel" aria-labelledby="tab-sbr">
+        <div class="timetable-panel" id="panel-sbr" role="region" aria-labelledby="tab-sbr">
 
           <div class="paper-dashboard">
 
@@ -2555,7 +2617,7 @@
                   <div class="schedule-content">
                     <strong>Question practice and correction</strong>
                     <span>
-                      Written practice, marking, corrections and improvement of weak reporting explanations.
+                      Written practice, marking, corrections and improvement of areas requiring stronger reporting explanations.
                     </span>
                   </div>
 
@@ -2574,7 +2636,7 @@
           </div>
         </div>
 
-        <div class="timetable-panel" id="panel-atx" role="tabpanel" aria-labelledby="tab-atx">
+        <div class="timetable-panel" id="panel-atx" role="region" aria-labelledby="tab-atx">
 
           <div class="paper-dashboard">
 
@@ -2730,7 +2792,7 @@
           </div>
 
           <h2 class="section-title">
-            The timetable is not random. It follows a
+            Build your knowledge through a
             <span>controlled academic rhythm.</span>
           </h2>
 
@@ -3110,7 +3172,7 @@
             <span>
               <strong>Zoom and portal access</strong>
               <span>
-                Use the student portal and support channels for controlled access guidance.
+                Use the student portal and support channels for class access guidance.
               </span>
             </span>
           </article>
@@ -3126,7 +3188,7 @@
             <span>
               <strong>Study preparation</strong>
               <span>
-                Ask what to prepare before your first class so that you start with discipline.
+                Ask what to prepare before your first class so that you arrive prepared.
               </span>
             </span>
           </article>
@@ -3210,9 +3272,16 @@
       const backdrop = document.getElementById("mobileBackdrop");
       const tabs = Array.from(document.querySelectorAll(".tab-button"));
       const panels = Array.from(document.querySelectorAll(".timetable-panel"));
+      if (!menuBtn || !closeBtn || !menu || !backdrop || !tabs.length || !panels.length) return;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
       const background = Array.from(body.children).filter(el =>
         ![menu, backdrop].includes(el) && el.tagName !== "SCRIPT");
+      const tabList = document.querySelector(".timetable-tabs");
+      const narrowTabs = window.matchMedia("(max-width: 760px)");
+      function listenMedia(query, listener) {
+        if (typeof query.addEventListener === "function") query.addEventListener("change", listener);
+        else if (typeof query.addListener === "function") query.addListener(listener);
+      }
       const previousInert = new Map();
       let returnFocus = null;
 
@@ -3224,12 +3293,15 @@
         previousInert.forEach((value, el) => { el.inert = value; });
         previousInert.clear();
         menuBtn.setAttribute("aria-expanded", "false");
-        if (restoreFocus && returnFocus) returnFocus.focus();
+        if (restoreFocus && returnFocus && returnFocus.isConnected && returnFocus.getClientRects().length) {
+          returnFocus.focus({ preventScroll: true });
+        }
         else if (menu.contains(document.activeElement)) document.activeElement.blur();
         menu.inert = true;
         menu.setAttribute("aria-hidden", "true");
       }
       function openMenu() {
+        if (menu.classList.contains("open")) return;
         returnFocus = document.activeElement;
         menu.inert = false;
         menu.setAttribute("aria-hidden", "false");
@@ -3257,8 +3329,11 @@
           }
         }
       });
-      window.matchMedia("(min-width: 1361px)").addEventListener("change", event => {
-        if (event.matches) closeMenu(false);
+      listenMedia(window.matchMedia("(min-width: 1361px)"), event => {
+        if (event.matches && menu.classList.contains("open")) {
+          closeMenu(false);
+          document.querySelector(".brand").focus({ preventScroll: true });
+        }
       });
 
       function activateTab(key, focus = false) {
@@ -3266,11 +3341,14 @@
         if (!selected) return false;
         tabs.forEach(tab => {
           const active = tab === selected;
+          tab.setAttribute("role", "tab");
           tab.setAttribute("aria-selected", String(active));
           tab.tabIndex = active ? 0 : -1;
         });
         panels.forEach(panel => {
           const active = panel.id === selected.getAttribute("aria-controls");
+          if (!active && panel.contains(document.activeElement)) selected.focus({ preventScroll: true });
+          panel.setAttribute("role", "tabpanel");
           panel.hidden = !active;
           panel.classList.toggle("active", active);
           panel.tabIndex = 0;
@@ -3278,10 +3356,10 @@
         if (focus) selected.focus({ preventScroll: true });
         return true;
       }
-      function updateHash(key) {
+      function updateHash(key, replace = false) {
         const hash = "#panel-" + key;
         if (location.hash === hash) return;
-        try { history.pushState(null, "", hash); }
+        try { history[replace ? "replaceState" : "pushState"](null, "", hash); }
         catch (_) { location.hash = hash; }
       }
       function keyFromHash() {
@@ -3293,6 +3371,12 @@
         } else if (!location.hash) activateTab("aaa");
       }
       activateTab(keyFromHash()) || activateTab("aaa");
+      tabList.setAttribute("role", "tablist");
+      function setTabOrientation() {
+        tabList.setAttribute("aria-orientation", narrowTabs.matches ? "vertical" : "horizontal");
+      }
+      setTabOrientation();
+      listenMedia(narrowTabs, setTabOrientation);
       body.classList.add("tabs-ready");
       tabs.forEach((tab, index) => {
         tab.addEventListener("click", () => {
@@ -3301,14 +3385,14 @@
         });
         tab.addEventListener("keydown", event => {
           let next;
-          if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
-          if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === (narrowTabs.matches ? "ArrowDown" : "ArrowRight")) next = (index + 1) % tabs.length;
+          if (event.key === (narrowTabs.matches ? "ArrowUp" : "ArrowLeft")) next = (index - 1 + tabs.length) % tabs.length;
           if (event.key === "Home") next = 0;
           if (event.key === "End") next = tabs.length - 1;
           if (next === undefined) return;
           event.preventDefault();
           const key = tabs[next].id.slice(4);
-          activateTab(key, true); updateHash(key);
+          activateTab(key, true); updateHash(key, true);
         });
       });
       document.querySelectorAll("[data-open-tab]").forEach(link => {
@@ -3323,7 +3407,6 @@
         });
       });
       window.addEventListener("hashchange", syncHash);
-      window.addEventListener("popstate", syncHash);
       if (/^#(?:panel-|tab-)/.test(location.hash)) requestAnimationFrame(syncHash);
       document.getElementById("year").textContent = new Date().getFullYear();
     })();
