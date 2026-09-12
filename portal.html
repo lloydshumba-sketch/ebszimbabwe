@@ -37,11 +37,44 @@
   <link rel="icon" type="image/png" href="excel-logo.png" />
   <link rel="apple-touch-icon" href="excel-logo.png" />
 
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+
+  <style id="portal-base-fallbacks">
+    :root { --white:#fff; --gold:#d9b773; --burgundy:#8a1538; --burgundy-700:#70112d; --navy-950:#081728; --navy-800:#102941; --text:#243447; --muted:#536173; --mist:#eef2f7; --paper:#f7f9fc; --line:#d6dee8; --shadow-soft:0 10px 30px #0817280d; --shadow:0 18px 45px #0817281a; }
+    *,*::before,*::after { box-sizing:border-box; }
+    body { margin:0; font-family:Calibri,"Segoe UI",Arial,sans-serif; color:var(--text); line-height:1.6; }
+    button,input { font:inherit; } a { color:inherit; text-decoration:none; } img { max-width:100%; }
+    .container { width:min(1320px,calc(100% - 40px)); margin-inline:auto; }
+    .topbar { background:var(--navy-950); color:var(--white); font-size:.85rem; padding:10px 0; }
+    .topbar-inner,.topbar-left,.topbar-right { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+    .topbar-inner { justify-content:space-between; } .status-chip { display:inline-flex; align-items:center; gap:8px; }
+    .live-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); }
+    .navbar { background:var(--white); border-bottom:1px solid var(--line); position:relative; z-index:20; }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:90px; }
+    .brand,.footer-brand { display:flex; align-items:center; gap:12px; }
+    .brand { flex-shrink:0; } .brand img,.footer-brand img { object-fit:contain; }
+    .brand-text strong,.brand-text span,.footer-brand strong,.footer-brand em { display:block; }
+    .brand-text strong { color:var(--navy-950); } .brand-text span { font-size:.8rem; color:var(--muted); }
+    .nav-links { display:flex; align-items:center; gap:14px; flex-wrap:wrap; } .nav-links a { font-weight:700; }
+    .nav-links a[aria-current="page"],.mobile-links a[aria-current="page"] { color:var(--burgundy); text-decoration:underline; text-underline-offset:6px; }
+    .btn,.nav-cta,.mobile-cta { display:inline-flex; justify-content:center; align-items:center; gap:10px; padding:14px 20px; min-height:48px; border-radius:14px; font-weight:700; cursor:pointer; }
+    .btn-primary,.nav-cta,.mobile-cta { background:var(--burgundy); color:var(--white); }
+    .btn-secondary { color:var(--white); border:1px solid #ffffff80; background:#ffffff12; }
+    .nav-cta { flex-shrink:0; } .menu-btn,.close-btn { width:44px; height:44px; border:1px solid var(--line); border-radius:12px; background:var(--white); color:var(--navy-950); cursor:pointer; }
+    .menu-btn { display:none; } .mobile-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:20px; }
+    .mobile-head strong,.mobile-head span { display:block; } .mobile-links { display:grid; gap:4px; }
+    .mobile-links a { display:flex; justify-content:space-between; align-items:center; gap:12px; min-height:44px; padding:10px 12px; border-radius:10px; }
+    .mobile-links a:hover { background:var(--mist); } .mobile-links .mobile-cta:hover { color:var(--burgundy); }
+    .eyebrow { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:18px; font-size:.85rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--burgundy); }
+    .eyebrow span { width:24px; height:2px; background:currentColor; } .eyebrow.light { justify-content:flex-start; color:var(--gold); }
+    .footer { background:var(--navy-950); color:#e1e7ef; padding:60px 0 24px; } .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px; }
+    .footer-grid>div>a:not(.footer-brand) { display:block; padding:6px 0; } .footer h3 { color:var(--white); } .footer-brand em { font-size:.8rem; font-style:normal; }
+    .footer-bottom { display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; border-top:1px solid #ffffff30; margin-top:32px; padding-top:24px; }
+    .whatsapp-float { position:fixed; right:20px; bottom:20px; z-index:30; width:54px; height:54px; display:grid; place-items:center; border-radius:50%; background:#126b38; color:white; box-shadow:0 5px 20px #0003; }
+    @media(max-width:1300px) { .nav-links,.nav-cta { display:none; } .menu-btn { display:grid; place-items:center; } }
+    @media(max-width:760px) { .footer-grid { grid-template-columns:1fr 1fr; } .topbar-right a { overflow-wrap:anywhere; } }
+    @media(max-width:480px) { .container { width:calc(100% - 28px); } .footer-grid { grid-template-columns:1fr; } .brand-text strong { font-size:.95rem; } .brand img { width:58px; } }
+  </style>
+
 
   <link rel="stylesheet" href="style.css" />
 
@@ -166,7 +199,7 @@
       backdrop-filter: blur(12px);
     }
 
-    .portal-badge-card i {
+    .portal-badge-card .icon {
       color: var(--gold);
       font-size: 1.25rem;
       margin-bottom: 16px;
@@ -324,7 +357,7 @@
       position: relative;
     }
 
-    .portal-input-wrap i {
+    .portal-input-wrap > .icon {
       position: absolute;
       left: 15px;
       top: 50%;
@@ -501,7 +534,8 @@
       font-size: 0.92rem;
     }
 
-    .dashboard-row span {
+    .dashboard-row > span:not(.dashboard-icon),
+    .dashboard-row > span:not(.dashboard-icon) span {
       display: block;
       color: var(--muted);
       font-size: 0.78rem;
@@ -712,7 +746,7 @@
       min-height: 190px;
     }
 
-    .support-contact-card i {
+    .support-contact-card .icon {
       color: var(--burgundy);
       font-size: 1.45rem;
       margin-bottom: 18px;
@@ -805,6 +839,38 @@
         width: 100%;
       }
     }
+
+    /* Readability, reliable vector icons and keyboard/touch navigation. */
+    [hidden] { display:none !important; }
+    .icon { display:inline-block; width:1.2em; height:1.2em; flex-shrink:0; vertical-align:-.2em; overflow:visible; }
+    .dashboard-icon { display:grid; place-items:center; color:var(--white); margin:0; font-size:1.2rem; }
+    .portal-feature-icon { font-size:1.4rem; }
+    .password-toggle { display:grid; place-items:center; width:44px; height:44px; right:5px; }
+    .password-toggle .icon { position:static; transform:none; margin:0; color:inherit; font-size:1.2rem; }
+    .support-contact-card a { display:flex; align-items:center; gap:8px; overflow-wrap:anywhere; min-height:44px; }
+    .support-contact-card a .icon { margin:0; font-size:1rem; }
+    .dashboard-row > span:not(.dashboard-icon) { min-width:0; }
+    .dashboard-status { font-style:normal; }
+    .portal-copy h1 { line-height:1.08; letter-spacing:-.04em; }
+    .portal-panel-title,.portal-section-head h2,.support-panel h2 { line-height:1.15; letter-spacing:-.035em; }
+    .portal-badge-card span { color:#dbe2eb; font-size:.9rem; }
+    .portal-field label,.portal-note { font-size:.9rem; }
+    .portal-form input { font-size:1rem; }
+    .portal-shell .reveal { opacity:1; visibility:visible; transform:none; }
+    a:focus-visible,button:focus-visible,[tabindex]:focus-visible,input:focus-visible { outline:3px solid #176cc1; outline-offset:4px; }
+    .portal-hero a:focus-visible,.support-panel a:focus-visible,.footer a:focus-visible { outline-color:var(--gold); }
+    .portal-forgot:hover,.support-contact-card a:hover,.footer a:hover { text-decoration:underline; }
+    .skip-link { position:fixed; top:8px; left:8px; z-index:2000; padding:12px 18px; background:white; color:#081728; transform:translateY(-180%); }
+    .skip-link:focus { transform:none; }
+    #login,#main-content { scroll-margin-top:110px; }
+    .mobile-menu { position:fixed; inset:0 0 0 auto; width:min(390px,100%); max-width:100%; height:100dvh; background:var(--white); color:var(--text); padding:24px; overflow-y:auto; z-index:1001; visibility:hidden; transform:translateX(100%); }
+    .mobile-menu.open { visibility:visible; transform:translateX(0); }
+    .mobile-backdrop { position:fixed; inset:0; z-index:1000; background:#08172899; display:none; }
+    .mobile-backdrop.open { display:block; } body.menu-open { overflow:hidden; }
+    .whatsapp-float .icon { font-size:1.6rem; }
+    @media(max-width:1300px) { .nav-links,.nav-cta { display:none; } .menu-btn { display:grid; place-items:center; } }
+    @media(max-width:620px) { .portal-login-card,.support-panel { padding:20px; } .dashboard-card-head { flex-wrap:wrap; } .portal-copy h1 { font-size:clamp(2.2rem,10vw,3.4rem); } .portal-logo-chip { min-width:0; } .portal-logo-chip img { flex-shrink:0; } }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; } }
   </style>
 </head>
 
@@ -816,20 +882,20 @@
     aria-label="Contact Excel Business School on WhatsApp"
     class="whatsapp-float"
   >
-    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    <svg class="icon icon-whatsapp"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a8.5 8.5 0 0 1-12.5 7.4L3 20l1.1-4.5A8.5 8.5 0 1 1 20 11.5Z"/><path d="m8 7 2 3-1 1c1 2 2 3 4 3l1-1 3 2c-1 4-10-1-10-6l1-2Z"/></svg>
   </a>
 
   <header class="topbar" aria-label="Institutional contact bar">
     <div class="container topbar-inner">
       <div class="topbar-left">
         <span class="status-chip"><span class="live-dot" aria-hidden="true"></span> Academic portal for enrolled ACCA candidates</span>
-        <span class="status-chip"><i class="fas fa-lock" aria-hidden="true"></i> Controlled learning access</span>
-        <span class="status-chip"><i class="fas fa-shield-halved" aria-hidden="true"></i> Academic governance</span>
+        <span class="status-chip"><svg class="icon icon-lock"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></svg> Controlled learning access</span>
+        <span class="status-chip"><svg class="icon icon-shield-halved"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Zm0 0v18"/></svg> Academic governance</span>
       </div>
 
       <div class="topbar-right">
-        <a href="mailto:lloyd.shumba@excelbusinessschool.uk"><i class="fa-solid fa-envelope" aria-hidden="true"></i> lloyd.shumba@excelbusinessschool.uk</a>
-        <a href="https://wa.me/260975899280" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> +260 975 899 280</a>
+        <a href="mailto:lloyd.shumba@excelbusinessschool.uk"><svg class="icon icon-envelope"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg> lloyd.shumba@excelbusinessschool.uk</a>
+        <a href="https://wa.me/260975899280" target="_blank" rel="noopener"><svg class="icon icon-whatsapp"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a8.5 8.5 0 0 1-12.5 7.4L3 20l1.1-4.5A8.5 8.5 0 1 1 20 11.5Z"/><path d="m8 7 2 3-1 1c1 2 2 3 4 3l1-1 3 2c-1 4-10-1-10-6l1-2Z"/></svg> +260 975 899 280</a>
       </div>
     </div>
   </header>
@@ -859,7 +925,7 @@
         <a href="portal.html" aria-current="page">Portal</a>
       </div>
 
-      <a href="index.html#contact" class="nav-cta">Request Access <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      <a href="index.html#contact" class="nav-cta">Request Access <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
 
       <button
         class="menu-btn"
@@ -869,44 +935,45 @@
         aria-controls="mobileMenu"
         aria-expanded="false"
       >
-        <i class="fas fa-bars" aria-hidden="true"></i>
+        <svg class="icon icon-bars"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
   </nav>
 
   <div class="mobile-backdrop" id="mobileBackdrop" aria-hidden="true"></div>
 
-  <aside class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile navigation">
+  <aside class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile navigation" inert>
     <div class="mobile-head">
       <div>
         <span>Navigation</span>
         <strong>Excel Business School</strong>
       </div>
       <button class="close-btn" id="closeBtn" type="button" aria-label="Close menu">
-        <i class="fas fa-times" aria-hidden="true"></i>
+        <svg class="icon icon-times"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg>
       </button>
     </div>
 
     <div class="mobile-links">
-      <a href="index.html#home">Home <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#about">About <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#courses">Courses <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#success">Student Success <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#methodology">Methodology <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#learning-rhythm">Learning Phases <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#admissions">Admissions <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#pricing">Fees <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#faculty">Faculty <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#governance">Governance <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#student-resources">Student Resources <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="index.html#sample-lectures">Sample Lectures <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a href="timetables.html">Timetables <i class="fas fa-calendar-alt" aria-hidden="true"></i></a>
-      <a href="portal.html">Student Portal <i class="fas fa-user-graduate" aria-hidden="true"></i></a>
+      <a href="index.html#home">Home <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#about">About <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#courses">Courses <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#success">Student Success <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#methodology">Methodology <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#learning-rhythm">Learning Phases <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#admissions">Admissions <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#pricing">Fees <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#faculty">Faculty <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#governance">Governance <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#student-resources">Student Resources <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="index.html#sample-lectures">Sample Lectures <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <a href="timetables.html">Timetables <svg class="icon icon-calendar-alt"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18M7 14h2m3 0h2m3 0h1M7 17h2m3 0h2"/></svg></a>
+      <a href="portal.html" aria-current="page">Student Portal <svg class="icon icon-user-graduate"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 5 8-3 8 3-8 3-8-3Zm3 2v4a5 5 0 0 0 10 0V7M4 22v-2c0-5 16-5 16 0v2M20 5v7"/></svg></a>
       <a href="index.html#contact" class="mobile-cta">Request Access</a>
     </div>
   </aside>
 
-  <main class="portal-shell">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main class="portal-shell" id="main-content" tabindex="-1">
     <section class="portal-hero" id="portal">
       <div class="container portal-hero-inner">
         <div class="portal-copy reveal">
@@ -924,25 +991,25 @@
           </p>
 
           <div class="portal-hero-actions">
-            <a href="#login" class="btn btn-primary">Access Dashboard <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="#login" class="btn btn-primary">Access Dashboard <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
             <a href="index.html#contact" class="btn btn-secondary">Request Portal Access</a>
           </div>
 
           <div class="portal-badges" aria-label="Portal highlights">
             <article class="portal-badge-card">
-              <i class="fas fa-video" aria-hidden="true"></i>
+              <svg class="icon icon-video"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2"/><path d="m15 10 6-3v10l-6-3"/></svg>
               <strong>Recorded lecture access</strong>
               <span>Replay important classes and revise complex technical areas with discipline.</span>
             </article>
 
             <article class="portal-badge-card">
-              <i class="fas fa-file-pen" aria-hidden="true"></i>
+              <svg class="icon icon-file-pen"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 3H5v18h7M13 3v6h6V9l-6-6Zm1 12 5-5 3 3-5 5-4 1 1-4Z"/></svg>
               <strong>Marked script practice</strong>
               <span>Submit assignments, receive corrections and improve exam technique.</span>
             </article>
 
             <article class="portal-badge-card">
-              <i class="fas fa-chart-line" aria-hidden="true"></i>
+              <svg class="icon icon-chart-line"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18M6 15l5-5 4 3 6-8"/></svg>
               <strong>Progress accountability</strong>
               <span>Track preparation, class updates, revision files and academic reminders.</span>
             </article>
@@ -959,7 +1026,7 @@
               </div>
             </div>
 
-            <span class="secure-pill"><i class="fas fa-shield-halved" aria-hidden="true"></i> Secure Access</span>
+            <span class="secure-pill"><svg class="icon icon-shield-halved"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Zm0 0v18"/></svg> Secure Access</span>
           </div>
 
           <div class="portal-tabs" role="tablist" aria-label="Portal access type">
@@ -996,7 +1063,7 @@
           </div>
 
           <div id="staff-panel" role="tabpanel" aria-labelledby="staff-tab" hidden>
-            <h2 class="portal-panel-title">Staff administration access</h2>
+            <h2 class="portal-panel-title" id="staff-login-title">Staff administration access</h2>
             <p class="portal-panel-copy">
               Staff access is restricted to authorised tutors and academic support personnel for learning administration and student support.
             </p>
@@ -1006,12 +1073,12 @@
             <div class="portal-field">
               <label for="emailInput">Email Address</label>
               <div class="portal-input-wrap">
-                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                <svg class="icon icon-envelope"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg>
                 <input
                   type="email"
                   id="emailInput"
                   name="email"
-                  autocomplete="email"
+                  autocomplete="username" inputmode="email" autocapitalize="none" spellcheck="false"
                   placeholder="student@excelbusinessschool.uk"
                   required
                 />
@@ -1021,7 +1088,7 @@
             <div class="portal-field">
               <label for="passwordInput">Password</label>
               <div class="portal-input-wrap">
-                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                <svg class="icon icon-lock"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></svg>
                 <input
                   type="password"
                   id="passwordInput"
@@ -1037,8 +1104,9 @@
                   id="passwordToggle"
                   aria-label="Show password"
                   aria-pressed="false"
+                  aria-controls="passwordInput"
                 >
-                  <i class="fa-regular fa-eye" id="passwordIcon" aria-hidden="true"></i>
+                  <svg class="icon icon-eye" id="passwordIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
                 </button>
               </div>
             </div>
@@ -1054,7 +1122,7 @@
 
             <button type="submit" class="btn btn-primary portal-submit" id="submitBtn">
               <span id="submitText">Access Dashboard</span>
-              <i class="fas fa-arrow-right" aria-hidden="true"></i>
+              <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
             </button>
           </form>
 
@@ -1073,7 +1141,7 @@
 
             <div class="dashboard-list">
               <article class="dashboard-row">
-                <span class="dashboard-icon"><i class="fas fa-clapperboard" aria-hidden="true"></i></span>
+                <span class="dashboard-icon"><svg class="icon icon-clapperboard"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="m3 8-1-4 18-3 1 4-18 3Zm4-5 3 4m4-5 3 4M3 12h18"/></svg></span>
                 <span>
                   <strong>Lecture Library</strong>
                   <span>Recordings, revision sessions and technical explanations.</span>
@@ -1082,7 +1150,7 @@
               </article>
 
               <article class="dashboard-row">
-                <span class="dashboard-icon"><i class="fas fa-folder-open" aria-hidden="true"></i></span>
+                <span class="dashboard-icon"><svg class="icon icon-folder-open"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 19V5h6l2 3h10v4M3 19l3-7h16l-3 7H3Z"/></svg></span>
                 <span>
                   <strong>Resource Vault</strong>
                   <span>Notes, question packs, class files and revision documents.</span>
@@ -1091,7 +1159,7 @@
               </article>
 
               <article class="dashboard-row">
-                <span class="dashboard-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></span>
+                <span class="dashboard-icon"><svg class="icon icon-graduation-cap"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m2 9 10-5 10 5-10 5L2 9Zm4 3v5c3 3 9 3 12 0v-5m4-3v8"/></svg></span>
                 <span>
                   <strong>Marked Practice</strong>
                   <span>Assignment submissions, corrections and tutor feedback.</span>
@@ -1113,32 +1181,32 @@
         </div>
         <div class="portal-feature-grid">
           <article class="portal-feature-card reveal">
-            <div class="portal-feature-icon"><i class="fas fa-video" aria-hidden="true"></i></div>
+            <div class="portal-feature-icon"><svg class="icon icon-video"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="12" height="12" rx="2"/><path d="m15 10 6-3v10l-6-3"/></svg></div>
             <h3>Recorded Lectures</h3>
             <p>Catch up on missed live sessions or rewatch complex technical modules at your own pace.</p>
           </article>
           <article class="portal-feature-card reveal">
-            <div class="portal-feature-icon"><i class="fas fa-file-lines" aria-hidden="true"></i></div>
+            <div class="portal-feature-icon"><svg class="icon icon-file-lines"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 3H5v18h14V9l-6-6Zm0 0v6h6M8 13h8m-8 4h8"/></svg></div>
             <h3>Structured Notes</h3>
             <p>Download comprehensive lecture notes, summaries, and technical article compilations.</p>
           </article>
           <article class="portal-feature-card reveal">
-            <div class="portal-feature-icon"><i class="fas fa-file-pen" aria-hidden="true"></i></div>
+            <div class="portal-feature-icon"><svg class="icon icon-file-pen"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 3H5v18h7M13 3v6h6V9l-6-6Zm1 12 5-5 3 3-5 5-4 1 1-4Z"/></svg></div>
             <h3>Marked Assignments</h3>
             <p>Submit practice scripts and receive detailed tutor feedback to refine exam technique.</p>
           </article>
           <article class="portal-feature-card reveal">
-            <div class="portal-feature-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></div>
+            <div class="portal-feature-icon"><svg class="icon icon-chart-line"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18M6 15l5-5 4 3 6-8"/></svg></div>
             <h3>Progress Tracking</h3>
             <p>Monitor completion milestones, assignment scores, and revision readiness indicators.</p>
           </article>
           <article class="portal-feature-card reveal">
-            <div class="portal-feature-icon"><i class="fas fa-calendar-alt" aria-hidden="true"></i></div>
+            <div class="portal-feature-icon"><svg class="icon icon-calendar-alt"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18M7 14h2m3 0h2m3 0h1M7 17h2m3 0h2"/></svg></div>
             <h3>Live Timetables</h3>
             <p>Stay updated with class schedules, assignment deadlines, and mock examination dates.</p>
           </article>
           <article class="portal-feature-card reveal">
-            <div class="portal-feature-icon"><i class="fas fa-headset" aria-hidden="true"></i></div>
+            <div class="portal-feature-icon"><svg class="icon icon-headset"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 13v-2a8 8 0 0 1 16 0v6c0 3-2 4-6 4"/><rect x="3" y="11" width="4" height="7" rx="2"/><rect x="17" y="11" width="4" height="7" rx="2"/></svg></div>
             <h3>Academic Support</h3>
             <p>Direct communication channels with faculty tutors for technical queries and guidance.</p>
           </article>
@@ -1180,22 +1248,22 @@
           <h2 id="support-title">Need help with <span>your portal access?</span></h2>
           <p>If you have misplaced your credentials or require assistance with your account, our administrative team is ready to assist you.</p>
           <div class="support-links">
-            <a href="https://wa.me/260975899280" target="_blank" rel="noopener" class="btn btn-primary">Contact via WhatsApp <i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+            <a href="https://wa.me/260975899280" target="_blank" rel="noopener" class="btn btn-primary">Contact via WhatsApp <svg class="icon icon-whatsapp"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a8.5 8.5 0 0 1-12.5 7.4L3 20l1.1-4.5A8.5 8.5 0 1 1 20 11.5Z"/><path d="m8 7 2 3-1 1c1 2 2 3 4 3l1-1 3 2c-1 4-10-1-10-6l1-2Z"/></svg></a>
             <a href="mailto:lloyd.shumba@excelbusinessschool.uk" class="btn btn-secondary">Email Support</a>
           </div>
         </div>
         <div class="support-cards reveal">
           <article class="support-contact-card">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <svg class="icon icon-envelope"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg>
             <h3>Email Assistance</h3>
             <p>Send your student ID and query to our support desk for prompt resolution.</p>
-            <a href="mailto:lloyd.shumba@excelbusinessschool.uk">lloyd.shumba@excelbusinessschool.uk <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="mailto:lloyd.shumba@excelbusinessschool.uk">lloyd.shumba@excelbusinessschool.uk <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
           </article>
           <article class="support-contact-card">
-            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <svg class="icon icon-whatsapp"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a8.5 8.5 0 0 1-12.5 7.4L3 20l1.1-4.5A8.5 8.5 0 1 1 20 11.5Z"/><path d="m8 7 2 3-1 1c1 2 2 3 4 3l1-1 3 2c-1 4-10-1-10-6l1-2Z"/></svg>
             <h3>WhatsApp Line</h3>
             <p>Instant messaging support for active students and urgent enquiries.</p>
-            <a href="https://wa.me/260975899280" target="_blank" rel="noopener">+260 975 899 280 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="https://wa.me/260975899280" target="_blank" rel="noopener">+260 975 899 280 <svg class="icon icon-arrow-right"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
           </article>
         </div>
       </div>
@@ -1235,125 +1303,126 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <span>© <span id="year"></span> Excel Business School. All rights reserved.</span>
+      <span>© <span id="year">2026</span> Excel Business School. All rights reserved.</span>
       <span>www.excelbusinessschool.uk</span>
     </div>
   </footer>
 
   <script>
     (function () {
-      const body = document.body;
+      'use strict';
       const menuBtn = document.getElementById('menuBtn');
       const closeBtn = document.getElementById('closeBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const mobileBackdrop = document.getElementById('mobileBackdrop');
-      const mobileLinks = document.querySelectorAll('.mobile-links a');
-      const year = document.getElementById('year');
-      
-      const studentTab = document.getElementById('student-tab');
-      const staffTab = document.getElementById('staff-tab');
-      const studentPanel = document.getElementById('student-panel');
-      const staffPanel = document.getElementById('staff-panel');
-      
-      const passwordInput = document.getElementById('passwordInput');
-      const passwordToggle = document.getElementById('passwordToggle');
-      const passwordIcon = document.getElementById('passwordIcon');
-      
-      const portalForm = document.getElementById('portalForm');
-      const portalStatus = document.getElementById('portalStatus');
-      const submitBtn = document.getElementById('submitBtn');
-      const submitText = document.getElementById('submitText');
-
-      function setMenuState(isOpen) {
-        if (!menuBtn || !mobileMenu || !mobileBackdrop) return;
-        mobileMenu.classList.toggle('open', isOpen);
-        mobileBackdrop.classList.toggle('open', isOpen);
-        mobileMenu.setAttribute('aria-hidden', String(!isOpen));
-        mobileBackdrop.setAttribute('aria-hidden', String(!isOpen));
-        menuBtn.setAttribute('aria-expanded', String(isOpen));
-        body.classList.toggle('menu-open', isOpen);
+      const menu = document.getElementById('mobileMenu');
+      const backdrop = document.getElementById('mobileBackdrop');
+      const background = [...document.body.children].filter(el => ![menu, backdrop].includes(el) && !['SCRIPT', 'STYLE'].includes(el.tagName));
+      const previousInert = new Map();
+      let menuOpen = false;
+      function setMenuState(open) {
+        if (menuOpen === open) return;
+        menuOpen = open;
+        menu.classList.toggle('open', open);
+        backdrop.classList.toggle('open', open);
+        menu.setAttribute('aria-hidden', String(!open));
+        menu.inert = !open;
+        menuBtn.setAttribute('aria-expanded', String(open));
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        document.body.classList.toggle('menu-open', open);
+        if (open) {
+          background.forEach(el => { previousInert.set(el, el.inert); el.inert = true; });
+          closeBtn.focus();
+        } else {
+          background.forEach(el => { el.inert = previousInert.get(el) || false; });
+          previousInert.clear();
+          menuBtn.focus();
+        }
       }
-
-      if (menuBtn) menuBtn.addEventListener('click', () => setMenuState(true));
-      if (closeBtn) closeBtn.addEventListener('click', () => setMenuState(false));
-      if (mobileBackdrop) mobileBackdrop.addEventListener('click', () => setMenuState(false));
-      mobileLinks.forEach(link => link.addEventListener('click', () => setMenuState(false)));
-
+      menuBtn.addEventListener('click', () => setMenuState(!menuOpen));
+      closeBtn.addEventListener('click', () => setMenuState(false));
+      backdrop.addEventListener('click', () => setMenuState(false));
+      menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuState(false)));
       document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') setMenuState(false);
+        if (!menuOpen) return;
+        if (event.key === 'Escape') { event.preventDefault(); setMenuState(false); }
+        if (event.key === 'Tab') {
+          const items = [...menu.querySelectorAll('button,a[href]')];
+          const first = items[0], last = items[items.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
       });
-
-      if (studentTab && staffTab && studentPanel && staffPanel) {
-        studentTab.addEventListener('click', () => {
-          studentTab.setAttribute('aria-selected', 'true');
-          studentTab.setAttribute('tabindex', '0');
-          staffTab.setAttribute('aria-selected', 'false');
-          staffTab.setAttribute('tabindex', '-1');
-          studentPanel.hidden = false;
-          staffPanel.hidden = true;
-        });
-
-        staffTab.addEventListener('click', () => {
-          staffTab.setAttribute('aria-selected', 'true');
-          staffTab.setAttribute('tabindex', '0');
-          studentTab.setAttribute('aria-selected', 'false');
-          studentTab.setAttribute('tabindex', '-1');
-          staffPanel.hidden = false;
-          studentPanel.hidden = true;
-        });
+      window.addEventListener('resize', () => {
+        if (menuOpen && getComputedStyle(menuBtn).display === 'none') {
+          setMenuState(false);
+          document.querySelector('.brand').focus();
+        }
+      });
+      const tabs = [...document.querySelectorAll('.portal-tab')];
+      const email = document.getElementById('emailInput');
+      const password = document.getElementById('passwordInput');
+      const status = document.getElementById('portalStatus');
+      const toggle = document.getElementById('passwordToggle');
+      const eye = document.getElementById('passwordIcon');
+      function clearStatus() {
+        status.textContent = '';
+        status.classList.remove('show');
+        [email,password].forEach(input => { input.removeAttribute('aria-invalid'); input.removeAttribute('aria-describedby'); });
       }
-
-      if (passwordToggle && passwordInput && passwordIcon) {
-        passwordToggle.addEventListener('click', () => {
-          const isPassword = passwordInput.type === 'password';
-          passwordInput.type = isPassword ? 'text' : 'password';
-          passwordToggle.setAttribute('aria-pressed', String(isPassword));
-          passwordToggle.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
-          passwordIcon.className = isPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+      function selectTab(index, focus) {
+        tabs.forEach((tab,i) => {
+          tab.setAttribute('aria-selected', String(i === index));
+          tab.tabIndex = i === index ? 0 : -1;
+          document.getElementById(tab.getAttribute('aria-controls')).hidden = i !== index;
         });
+        document.getElementById('login').setAttribute('aria-labelledby', index ? 'staff-login-title' : 'portal-login-title');
+        email.placeholder = index ? 'staff@excelbusinessschool.uk' : 'student@excelbusinessschool.uk';
+        clearStatus();
+        if (focus) tabs[index].focus();
       }
-
-      if (portalForm && portalStatus && submitBtn && submitText) {
-        portalForm.addEventListener('submit', event => {
-          event.preventDefault();
-          const email = document.getElementById('emailInput').value.trim();
-          const password = passwordInput.value.trim();
-
-          if (!email || !password) {
-            portalStatus.textContent = 'Please enter both your email address and password to access the dashboard.';
-            portalStatus.classList.add('show');
-            return;
-          }
-
-          submitBtn.disabled = true;
-          submitText.textContent = 'Authenticating...';
-          portalStatus.classList.remove('show');
-
-          setTimeout(() => {
-            submitBtn.disabled = false;
-            submitText.textContent = 'Access Dashboard';
-            portalStatus.textContent = 'Authentication successful. Redirecting to your secure academic dashboard...';
-            portalStatus.classList.add('show');
-          }, 1200);
+      tabs.forEach((tab,index) => {
+        tab.addEventListener('click', () => selectTab(index, false));
+        tab.addEventListener('keydown', event => {
+          let next;
+          if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+          else if (event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length;
+          else if (event.key === 'Home') next = 0;
+          else if (event.key === 'End') next = tabs.length - 1;
+          else return;
+          event.preventDefault(); selectTab(next, true);
         });
-      }
-
-      const revealItems = document.querySelectorAll('.reveal');
-      if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in-view');
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.14 });
-        revealItems.forEach(item => revealObserver.observe(item));
-      } else {
-        revealItems.forEach(item => item.classList.add('in-view'));
-      }
-
-      if (year) year.textContent = new Date().getFullYear();
+      });
+      const eyePaths = ["<path d=\"M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "<path d=\"m3 3 18 18M10 5a12 12 0 0 1 12 7 18 18 0 0 1-3 4M6 6a18 18 0 0 0-4 6s3 7 10 7a12 12 0 0 0 5-1M10 10a3 3 0 0 0 4 4\"/>"];
+      toggle.addEventListener('click', () => {
+        const visible = password.type === 'password';
+        password.type = visible ? 'text' : 'password';
+        toggle.setAttribute('aria-pressed', String(visible));
+        toggle.setAttribute('aria-label', visible ? 'Hide password' : 'Show password');
+        eye.innerHTML = eyePaths[visible ? 1 : 0];
+      });
+      [email,password].forEach(input => input.addEventListener('input', clearStatus));
+      document.getElementById('portalForm').addEventListener('submit', event => {
+        event.preventDefault(); clearStatus();
+        email.value = email.value.trim();
+        let invalid = null;
+        if (!email.validity.valid) {
+          status.textContent = email.value ? 'Please enter a valid email address.' : 'Please enter your email address.';
+          invalid = email;
+        } else if (!password.value) {
+          status.textContent = 'Please enter your password.';
+          invalid = password;
+        } else {
+          // This supplied page has no authentication endpoint. Never simulate a successful login.
+          // Connect the school's real authentication service before enabling dashboard access
+          // or persistent sessions. Do not store passwords in browser storage.
+          status.textContent = 'Online sign-in is currently unavailable. Please contact academic support for help accessing your dashboard.';
+        }
+        status.classList.add('show');
+        if (invalid) {
+          invalid.setAttribute('aria-invalid','true'); invalid.setAttribute('aria-describedby','portalStatus'); invalid.focus();
+        }
+      });
+      document.querySelectorAll('.reveal').forEach(item => item.classList.add('in-view'));
+      document.getElementById('year').textContent = new Date().getFullYear();
     })();
   </script>
 </body>
